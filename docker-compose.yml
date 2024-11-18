@@ -25,9 +25,6 @@ services:
   database:
     image: mysql:latest
     container_name: mysql
-    secrets:
-      - db_root_password
-      - db_restaurant_password
     environment:
       MYSQL_USER: manager
       MYSQL_DATABASE: restaurant
@@ -43,7 +40,7 @@ services:
       - project-network
 
   phpmyadmin:
-    image: phpmyadminSS
+    image: phpmyadmin
     container_name: phpmyadmin
     environment:
       MYSQL_USER: manager
@@ -53,9 +50,6 @@ services:
       MYSQL_ROOT_PASSWORD: rootdatabasepassword
       # -----------------------------------------
       PMA_HOST: mysql
-    secrets:
-      - db_root_password
-      - db_restaurant_password
     ports:
       - "8081:80"
     depends_on:
@@ -66,9 +60,3 @@ services:
 networks:
   project-network:
     driver: bridge
-
-secrets:
-  db_root_password:
-    file: db_root_password.txt
-  db_restaurant_password:
-    file: db_restaurant_password.txt
