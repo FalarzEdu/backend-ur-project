@@ -1,12 +1,17 @@
-## Sistema de gerenciameto de processos para restaurantes universitários
+# Sistema de gerenciamento de processos para restaurantes universitários (PT-BR)
+### University restaurants process management system (EN)
 
-### University restaurants process management system
+<br>
 
-## Em desenvolvimento :building_construction:
+### Em desenvolvimento :building_construction: (PT-BR)
 
-### Under development :building_construction:
+### Under development :building_construction: (EN)
 
-## Português
+<br>
+
+## Português (PT-BR)
+
+<br>
 
 ### Sumário
 
@@ -21,7 +26,8 @@ Este projeto visa otimizar a qualidade, velocidade e eficiência do serviço em 
 
 1. Clone o repositório em sua máquina.
 2. Navegue até o diretório raiz do projeto.
-3. Mude o usuário padrão e sua senha e a senha do usuário _root_ no arquivo "docker-compose.yml" conforme necessário.
+3. Importe a base localizada na pasta "sql" para o seu SGBD (Sistema Gerenciador de Bancos de Dados).
+4. Mude o usuário padrão e sua senha e a senha do usuário _root_ no arquivo "docker-compose.yml" conforme necessário.
 
 ```
 environment:
@@ -33,15 +39,20 @@ environment:
   # -----------------------------------------
 ```
 
-1. Rode o comando:
-   1. docker-compose up
-2. Acessos:
+5. Rode o comando:
+   5.1. docker-compose up
+6. Acessos:
    1. Projeto:
       1. http://localhost:8080
    2. Banco de dados:
       1. http://localhost:8081
 
-## English
+-------------------------------------------------------------------------
+<br>
+
+## English (EN)
+
+<br>
 
 ### Summary
 
@@ -56,7 +67,8 @@ This project intends to optimize university restaurants' service quality, speed,
 
 1. Clone this repository into your machine.
 2. Navigate to the root directory of the project.
-3. Change the standard user and its password and the root password in the "docker-compose.yml" file if necessary.
+3. Import the database under the "sql" directory into your DBMS (Database Management System).
+4. Change the standard user and its password and the root password in the "docker-compose.yml" file if necessary.
 
 ```
 environment:
@@ -68,9 +80,9 @@ environment:
   # -----------------------------------------
 ```
 
-1. Run the command:
+5. Run the command:
    1. docker-compose up
-2. Access:
+6. Access:
    1. Project:
       1. http://localhost:8080
    2. Database:
