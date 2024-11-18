@@ -9,4 +9,5 @@
 /dataSources/
 /dataSources.local.xml
 # Logs
-/log/nginx
+/log/nginx/access.log
+/log/nginx/error.log
