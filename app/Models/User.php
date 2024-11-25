@@ -8,13 +8,6 @@ use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
 use Core\Database\ActiveRecord\Model;
 
-// id' => 0,
-//             'name' => 'Fulano',
-//             'academic_register' => '0',
-//             'email' => 'fulano@example.com',
-//             'password' => '123456',
-//             'phone' => '0',
-
 /**
  * @property int $id
  * @property string $name
@@ -30,7 +23,7 @@ class User extends Model
 
     protected ?string $password = null;
     protected ?string $password_confirmation = null;
-    protected ?string $encrypted_password = null;
+    // protected ?string $encrypted_password = null;
 
     // public function problems(): HasMany
     // {
@@ -56,11 +49,11 @@ class User extends Model
 
     public function authenticate(string $password): bool
     {
-        if ($this->encrypted_password == null) {
+        if ($this->password == null) {
             return false;
         }
 
-        return password_verify($password, $this->encrypted_password);
+        return password_verify($password, $this->password);
     }
 
     public static function findByEmail(string $email): User | null
@@ -77,7 +70,7 @@ class User extends Model
             $this->newRecord() &&
             $value !== null && $value !== ''
         ) {
-            $this->encrypted_password = password_hash($value, PASSWORD_DEFAULT);
+            $this->password = password_hash($value, PASSWORD_DEFAULT);
         }
     }
 

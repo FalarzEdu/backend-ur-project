@@ -3,6 +3,7 @@
 namespace Core\Database\ActiveRecord;
 
 use Core\Database\Database;
+use Core\Debug\Debugger;
 use Lib\Paginator;
 use Lib\StringUtils;
 use PDO;
