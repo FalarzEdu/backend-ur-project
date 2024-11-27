@@ -14,6 +14,7 @@ use Core\Database\ActiveRecord\Model;
  * @property string $academic_register
  * @property string $email
  * @property string $password
+ * @property string $password_confirmation
  * @property string $phone
  */
 class User extends Model
@@ -23,7 +24,6 @@ class User extends Model
 
     protected ?string $password = null;
     protected ?string $password_confirmation = null;
-    protected ?string $encrypted_password = null;
 
     // public function problems(): HasMany
     // {
@@ -37,23 +37,23 @@ class User extends Model
 
     public function validates(): void
     {
-        Validations::notEmpty('name', $this);
-        Validations::notEmpty('email', $this);
+        Validations::notEmpty(attribute: 'name', obj: $this);
+        Validations::notEmpty(attribute: 'email', obj: $this);
 
-        Validations::uniqueness('email', $this);
+        Validations::uniqueness(fields: 'email', object: $this);
 
         if ($this->newRecord()) {
-            Validations::passwordConfirmation($this);
+            Validations::passwordConfirmation(obj: $this);
         }
     }
 
     public function authenticate(string $password): bool
     {
-        if ($this->encrypted_password == null) {
+        if ($this->password == null) {
             return false;
         }
 
-        return password_verify($password, $this->encrypted_password);
+        return password_verify($password, $this->password);
     }
 
     public static function findByEmail(string $email): User | null
@@ -70,7 +70,7 @@ class User extends Model
             $this->newRecord() &&
             $value !== null && $value !== ''
         ) {
-            $this->encrypted_password = password_hash($value, PASSWORD_DEFAULT);
+            $this->password = password_hash($value, PASSWORD_DEFAULT);
         }
     }
 
