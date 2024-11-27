@@ -8,13 +8,6 @@ use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
 use Core\Database\ActiveRecord\Model;
 
-// id' => 0,
-//             'name' => 'Fulano',
-//             'academic_register' => '0',
-//             'email' => 'fulano@example.com',
-//             'password' => '123456',
-//             'phone' => '0',
-
 /**
  * @property int $id
  * @property string $name

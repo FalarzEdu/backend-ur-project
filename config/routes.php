@@ -1,8 +1,13 @@
 <?php
 
 use App\Controllers\AuthController;
+use App\Controllers\UserController;
 use Core\Router\Route;
 
 // Authentication
-Route::get('/login', [AuthController::class, 'new'])->name('users.login');
-Route::post('/login', [AuthController::class, 'new'])->name('users.login');
+Route::get('/', [AuthController::class, 'new'])->name('users.login');
+Route::post('/', [AuthController::class, 'new'])->name('users.login');
+
+Route::middleware('auth:user')->group(function() {
+  Route::get('/home', [UserController::class, 'new'])->name('users.home');
+});
