@@ -9,7 +9,7 @@ use Lib\FlashMessage;
 
 Class UserController {
 
-  private string $layout = 'home';
+  private string $layout = 'homeAdmin';
 
   public function index(): void 
   {
