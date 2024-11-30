@@ -1,1 +1,31 @@
-<h1>User</h1>
+<div class="background">
+    <div class="container">
+        <nav>
+            <i class="fa-solid fa-bars" id="open"></i>
+
+            <ul class="lista" id="lista">
+                <li id="close">
+                    <i class="fa-solid fa-xmark"></i>
+                </li>
+                <li>
+                    <i class="fa-regular fa-circle-user"></i>Perfil
+                </li>
+                <li>
+                    <i class="fa-regular fa-message"></i> Feedback's
+                </li>
+                <li>
+                    <a class="dropdown-item" href="<?= route('users.logout') ?>"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="to_schedule">
+                <h2>Agendar Refeição</h2>
+            </div>
+            <div class="menu">
+                <h3>Cardápio</h3>
+            </div>
+        </main>
+    </div>
+</div>
