@@ -1,0 +1,32 @@
+<div class="background">
+    <div class="container">
+        <nav>
+            <i class="fa-solid fa-bars" id="open"></i>
+
+            <ul class="lista" id="lista">
+                <li id="close">
+                    <i class="fa-solid fa-xmark"></i>
+                </li>
+                <li>
+                    <i class="fa-regular fa-circle-user"></i>Perfil
+                </li>
+                <li>
+                    <i class="fa-regular fa-message"></i> Feedback's
+                </li>
+                <li>
+                    <i class="fa-regular fa-square-plus"></i>Cardápio
+                </li>
+                <li>
+                    <a class="dropdown-item" href="<?= route('users.logout') ?>"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="card">
+                <h3>Refeições Confirmadas</h3>
+                <p>100</p>
+            </div>
+        </main>
+    </div>
+</div>
