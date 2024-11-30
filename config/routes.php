@@ -10,5 +10,5 @@ Route::post('/', [AuthController::class, 'authenticate'])->name('users.login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [UserController::class, 'new'])->name('users.home');
-    Route::get('/logout', [AuthController::class, 'destroy'])->name('admins.logout');
+    Route::get('/logout', [AuthController::class, 'destroy'])->name('users.logout');
 });
