@@ -3,7 +3,6 @@
 use App\Controllers\AuthController;
 use App\Controllers\UserController;
 use App\Controllers\AdminController;
-
 use Core\Router\Route;
 
 // Authentication

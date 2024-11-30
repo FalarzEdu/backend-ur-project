@@ -22,7 +22,7 @@ use Core\Database\ActiveRecord\Model;
  * @property string $password
  */
 
- 
+
 class Admin extends Model
 {
     protected static string $table = 'admins';
