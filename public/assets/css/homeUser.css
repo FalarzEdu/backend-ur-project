@@ -97,10 +97,11 @@ main {
   align-items: center;
   justify-content: center;
   height: 100%;
+  gap: 5%;
 }
 
-.to_schedule,
-.menu {
+button {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,15 +113,12 @@ main {
 .to_schedule {
   width: 60%; 
   padding: 30px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 20px;
 }
 
 .menu {
+  font-size: 15px;
   width: 30%;
   padding: 20px;
-}
-
-.to_schedule h2 {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 30px;
-  text-align: center;
 }
