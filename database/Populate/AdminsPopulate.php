@@ -10,7 +10,6 @@ class AdminsPopulate
     public static function populate()
     {
         $data =  [
-            'id' => 0,
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => '123456',

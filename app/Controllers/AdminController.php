@@ -13,7 +13,7 @@ class AdminController
 
     public function index(): void
     {
-        $this->render('index');
+        $this->render(view: 'index');
     }
 
   /**

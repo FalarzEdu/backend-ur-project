@@ -5,11 +5,18 @@ use App\Controllers\UserController;
 use App\Controllers\AdminController;
 use Core\Router\Route;
 
-// Authentication
-Route::get('/login', [AuthController::class, 'new'])->name('users.login');
-Route::post('/login', [AuthController::class, 'new'])->name('users.login');
+/* User authentication ################################### */
+Route::get(uri: '/login', action: [AuthController::class, 'new'])->name(name: 'login');
+Route::post(uri: '/login', action: [AuthController::class,'authenticate'])->name(name: 'login');
 
-Route::get('/', [UserController::class, 'index'])->name('users.home');
-Route::get('/logout', [AuthController::class, 'destroy'])->name('users.logout');
+Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
+    Route::get(uri: '/home', action: [UserController::class, 'index'])->name(name: 'users.home');
+});
 
-Route::get('/homeAdmin', [AdminController::class, 'index'])-> name('admins.home');
+Route::middleware(middleware: 'auth:admin')->group(callback: function (): void {
+    Route::get(uri: '/dashboard', action: [AdminController::class, 'index'])-> name(name: 'admins.home');
+});
+
+Route::middleware(middleware: 'auth')->group(callback: function (): void {
+    Route::get(uri: '/logout', action: [AuthController::class, 'destroy'])->name(name: 'logout');
+});

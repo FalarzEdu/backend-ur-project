@@ -9,11 +9,11 @@ use Lib\FlashMessage;
 
 class UserController
 {
-    private string $layout = 'homeAdmin';
+    private string $layout = 'homeUser';
 
     public function index(): void
     {
-        $this->render('index');
+        $this->render(view: 'index');
     }
 
   /**
@@ -21,9 +21,9 @@ class UserController
   */
     private function render(string $view, array $data = []): void
     {
-        extract($data);
+        extract(array: $data);
 
-        $view = '/var/www/app/views/home/admin/' . $view . '.phtml';
+        $view = '/var/www/app/views/home/user/' . $view . '.phtml';
         require '/var/www/app/views/layouts/' . $this->layout . '.phtml';
     }
 }

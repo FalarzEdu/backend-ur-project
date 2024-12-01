@@ -145,6 +145,10 @@ class Route
 
     public static function middleware(string $middleware): RouteWrapperMiddleware
     {
-        return new RouteWrapperMiddleware($middleware);
+        $explodedMiddleware = explode(separator: ':', string: $middleware);
+        return new RouteWrapperMiddleware(
+            name: $explodedMiddleware[0],
+            roleRestriction: $explodedMiddleware[1] ?? 'all',
+        );
     }
 }
