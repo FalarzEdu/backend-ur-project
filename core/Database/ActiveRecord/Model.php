@@ -128,6 +128,15 @@ abstract class Model
         return null;
     }
 
+    /**
+     * Return all errors triggered during user object manipulation
+     * @return array<string> | null
+     */
+    public function allErrors(): ?array
+    {
+        return !empty($this->errors) ? $this->errors : null;
+    }
+
     public function addError(string $index, string $value): void
     {
         $this->errors[$index] = $value;

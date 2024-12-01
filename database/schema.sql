@@ -1,3 +1,24 @@
+SET foreign_key_checks = 0;
+
+DROP TABLE IF EXISTS `admins`;
+DROP TABLE IF EXISTS `announcements`;
+DROP TABLE IF EXISTS `average_consumption`;
+DROP TABLE IF EXISTS `buffet_reservations`;
+DROP TABLE IF EXISTS `feedbacks`;
+DROP TABLE IF EXISTS `feedback_images`;
+DROP TABLE IF EXISTS `feedback_status`;
+DROP TABLE IF EXISTS `foods`;
+DROP TABLE IF EXISTS `food_consumption`;
+DROP TABLE IF EXISTS `meals`;
+DROP TABLE IF EXISTS `meal_statistics`;
+DROP TABLE IF EXISTS `menus`;
+DROP TABLE IF EXISTS `messages`;
+DROP TABLE IF EXISTS `payment_type`;
+DROP TABLE IF EXISTS `snackbar_goods`;
+DROP TABLE IF EXISTS `snackbar_goods_reservation`;
+DROP TABLE IF EXISTS `snackbar_reservation`;
+DROP TABLE IF EXISTS `users`;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -567,3 +588,5 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+SET foreign_key_checks = 1;
