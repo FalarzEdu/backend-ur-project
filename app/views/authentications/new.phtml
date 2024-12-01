@@ -1,4 +1,4 @@
-<form action="<?= Route(name: 'login') ?>" method="POST" class="background">
+<form action="<?= Route(name: 'authenticate.login') ?>" method="POST" class="background">
     <div class="form-group mb-3">
         <label for="user_email" class="form-label">Email</label>
         <input id="user_email" type="email" name="user[email]" class="form-control" placeholder="Enter email">
@@ -10,4 +10,5 @@
     <div class="d-grid">
         <input type="submit" class="btn btn-primary btn-block" value="Entrar">
     </div>
+    <? print_r($_SESSION); ?>
 </form>

@@ -19,7 +19,7 @@ class Authenticate implements Middleware
 
         if (!Auth::check()) {
             FlashMessage::danger(value: 'Você deve estar logado para acessar essa página');
-            $this->redirectTo(location: route(name: 'login'));
+            $this->redirectTo(location: route(name: 'all.login'));
             return;
         } else {
             if ($this->roleRestriction === 'all') {
@@ -30,7 +30,7 @@ class Authenticate implements Middleware
                 )
             ) {
                 FlashMessage::danger(value: 'Você deve estar logado para acessar essa página');
-                $this->redirectTo(location: route(name: 'login'));
+                $this->redirectTo(location: route(name: 'all.login'));
                 return;
             }
         }

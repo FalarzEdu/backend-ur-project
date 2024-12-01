@@ -1,13 +1,11 @@
-console.log("novo");
-
-let open = document.getElementById("open");
-let close = document.getElementById("close");
-let lista = document.getElementById("lista");
+const open = document.getElementById("open");
+const close = document.getElementById("close");
+const lista = document.getElementById("lista");
 
 open.onclick = () => {
   lista.style.display = "block";
 };
 
 close.onclick = () => {
-    lista.style.display = "none";
-}
+  lista.style.display = "none";
+};

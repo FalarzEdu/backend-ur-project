@@ -32,7 +32,7 @@ class AuthController
                 $this->redirectTo(location: route(name: 'admins.home'));
             } else {
                 FlashMessage::danger(value: 'Email e/ou senha inválidos!');
-                $this->redirectTo(location: route(name: 'login'));
+                $this->redirectTo(location: route(name: 'all.login'));
             }
         } elseif (is_a(object_or_class: $user, class: User::class)) {
             if ($user->authenticate(password: $params['password'])) {
@@ -42,11 +42,11 @@ class AuthController
                 $this->redirectTo(location: route(name: 'users.home'));
             } else {
                 FlashMessage::danger(value: 'Email e/ou senha inválidos!');
-                $this->redirectTo(location: route(name: 'login'));
+                $this->redirectTo(location: route(name: 'all.login'));
             }
         } else {
             FlashMessage::danger(value: 'Email e/ou senha inválidos!');
-            $this->redirectTo(location: route(name: 'login'));
+            $this->redirectTo(location: route(name: 'all.login'));
         }
     }
 
@@ -54,7 +54,7 @@ class AuthController
     {
         Auth::logout();
         FlashMessage::success(value: 'Logout realizado com sucesso!');
-        $this->redirectTo(location: route(name: 'login'));
+        $this->redirectTo(location: route(name: 'all.login'));
     }
 
     /**
@@ -62,7 +62,7 @@ class AuthController
      */
     private function render(string $view, array $data = []): void
     {
-        extract($data);
+        extract(array: $data);
 
         $view = '/var/www/app/views/authentications/' . $view . '.phtml';
         require '/var/www/app/views/layouts/' . $this->layout . '.phtml';
@@ -70,7 +70,7 @@ class AuthController
 
     private function redirectTo(string $location): void
     {
-        header('Location: ' . $location);
+        header(header: 'Location: ' . $location);
         exit;
     }
 }
