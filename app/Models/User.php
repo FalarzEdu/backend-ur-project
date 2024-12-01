@@ -52,8 +52,8 @@ class User extends Model
         if ($this->password == null) {
             return false;
         }
-
-        return password_verify(password: $password, hash: $this->password);
+      
+        return password_verify(password: $password, hash: $this->password); 
     }
 
     public static function findByEmail(string $email): User | null

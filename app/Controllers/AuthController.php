@@ -27,7 +27,7 @@ class AuthController
         if (is_a(object_or_class: $user, class: Admin::class)) {
             if ($user->authenticate(password: $params['password'])) {
                 Auth::login(user: $user, role: 'admin');
-
+              
                 FlashMessage::success(value: 'Login realizado com sucesso!');
                 $this->redirectTo(location: route(name: 'admins.home'));
             } else {

@@ -1,0 +1,27 @@
+<div class="background">
+    <div class="container">
+        <nav>
+            <i class="fa-solid fa-bars" id="open"></i>
+
+            <ul class="lista" id="lista">
+                <li id="close">
+                    <i class="fa-solid fa-xmark"></i>
+                </li>
+                <li>
+                    <i class="fa-regular fa-circle-user"></i>Perfil
+                </li>
+                <li>
+                    <i class="fa-regular fa-message"></i> Feedback's
+                </li>
+                <li>
+                    <a class="dropdown-item" href="<?= route('users.logout') ?>"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <button type="button" class="to_schedule">Agendar Refeição</button>
+            <button type="button" class="menu">Cardápio</button>
+        </main>
+    </div>
+</div>
