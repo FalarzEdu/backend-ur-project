@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Models\Users;
+namespace Tests\Unit\Models\Admins;
 
 use App\Models\Admin;
 use Core\Debug\Debugger;
