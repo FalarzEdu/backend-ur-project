@@ -6,12 +6,12 @@ class FlashMessage
 {
     public static function success(string $value): void
     {
-        self::message('success', $value);
+        self::message(type: 'success', value: $value);
     }
 
     public static function danger(string $value): void
     {
-        self::message('danger', $value);
+        self::message(type: 'danger', value: $value);
     }
 
     public static function get(): array

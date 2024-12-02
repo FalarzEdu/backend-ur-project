@@ -2,14 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\Admin;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\FlashMessage;
 
-class UserController
+class AdminController
 {
-    private string $layout = 'homeUser';
+    private string $layout = 'homeAdmin';
 
     public function index(): void
     {
@@ -21,9 +21,9 @@ class UserController
   */
     private function render(string $view, array $data = []): void
     {
-        extract(array: $data);
+        extract($data);
 
-        $view = '/var/www/app/views/home/user/' . $view . '.phtml';
+        $view = '/var/www/app/views/home/admin/' . $view . '.phtml';
         require '/var/www/app/views/layouts/' . $this->layout . '.phtml';
     }
 }

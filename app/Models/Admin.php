@@ -11,29 +11,17 @@ use Core\Database\ActiveRecord\Model;
 /**
  * @property int $id
  * @property string $name
- * @property string $academic_register
  * @property string $email
  * @property string $password
- * @property string $password_confirmation
- * @property string $phone
  */
-class User extends Model
+
+class Admin extends Model
 {
-    protected static string $table = 'users';
-    protected static array $columns = ['name', 'academic_register', 'email', 'password', 'phone'];
+    protected static string $table = 'admins';
+    protected static array $columns = ['name', 'email', 'password'];
 
     protected ?string $password = null;
     protected ?string $password_confirmation = null;
-
-    // public function problems(): HasMany
-    // {
-    //     return $this->hasMany(Problem::class, 'user_id');
-    // }
-
-    // public function reinforcedProblems(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Problem::class, 'problem_user_reinforce', 'user_id', 'problem_id');
-    // }
 
     public function validates(): void
     {
@@ -43,7 +31,7 @@ class User extends Model
         Validations::uniqueness(fields: 'email', object: $this);
 
         if ($this->newRecord()) {
-            Validations::passwordConfirmation(obj: $this);
+            Validations::passwordConfirmation($this);
         }
     }
 
@@ -56,21 +44,21 @@ class User extends Model
         return password_verify(password: $password, hash: $this->password);
     }
 
-    public static function findByEmail(string $email): User | null
+    public static function findByEmail(string $email): Admin | null
     {
-        return User::findBy(['email' => $email]);
+        return Admin::findBy(conditions: ['email' => $email]);
     }
 
     public function __set(string $property, mixed $value): void
     {
-        parent::__set($property, $value);
+        parent::__set(property: $property, value: $value);
 
         if (
             $property === 'password' &&
             $this->newRecord() &&
             $value !== null && $value !== ''
         ) {
-            $this->password = password_hash($value, PASSWORD_DEFAULT);
+            $this->password = password_hash(password: $value, algo: PASSWORD_DEFAULT);
         }
     }
 

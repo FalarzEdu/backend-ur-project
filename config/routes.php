@@ -2,13 +2,24 @@
 
 use App\Controllers\AuthController;
 use App\Controllers\UserController;
+use App\Controllers\AdminController;
 use Core\Router\Route;
 
-// Authentication
-Route::get('/', [AuthController::class, 'new'])->name('users.login');
-Route::post('/', [AuthController::class, 'authenticate'])->name('users.login');
+/* User authentication ################################### */
+Route::get(uri: '/login', action: [AuthController::class, 'new'])->name(name: 'all.login');
+Route::post(uri: '/login', action: [AuthController::class,'authenticate'])->name(name: 'authenticate.login');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/home', [UserController::class, 'new'])->name('users.home');
-    Route::get('/logout', [AuthController::class, 'destroy'])->name('users.logout');
+/* User protected routes ################################# */
+Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
+    Route::get(uri: '/home', action: [UserController::class, 'index'])->name(name: 'users.home');
+});
+
+/* Admin protected routes ################################ */
+Route::middleware(middleware: 'auth:admin')->group(callback: function (): void {
+    Route::get(uri: '/dashboard', action: [AdminController::class, 'index'])-> name(name: 'admins.home');
+});
+
+/* Every one protected routes ############################ */
+Route::middleware(middleware: 'auth')->group(callback: function (): void {
+    Route::get(uri: '/logout', action: [AuthController::class, 'destroy'])->name(name: 'logout');
 });

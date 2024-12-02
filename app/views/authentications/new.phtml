@@ -1,15 +1,15 @@
 <div class="background">
-    <form action="/" method="POST">
-        <div>
-            <label for="user_email" class="teste">Email</label>
-            <input id="user_email" type="email" name="user[email]" class="form-control">
+    <form action="<?= Route(name: 'authenticate.login') ?>" method="POST">
+        <div class="form-group mb-3">
+            <label for="user_email" class="form-label">Email</label>
+            <input id="user_email" type="email" name="user[email]" class="form-control" placeholder="Enter email">
         </div>
-        <div>
+        <div class="form-group mb-3">
             <label for="user_password" class="form-label">Senha</label>
-            <input id="user_password" type="password" name="user[password]" class="form-control">
+            <input id="user_password" type="password" name="user[password]" class="form-control" placeholder="Password">
         </div>
-        <div>
-            <input type="submit"value="Logar">
+        <div class="d-grid">
+            <input type="submit" class="btn btn-primary btn-block" value="Entrar">
         </div>
     </form>
 </div>
