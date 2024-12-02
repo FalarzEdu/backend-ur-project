@@ -8,7 +8,8 @@ use Core\Http\Middleware\Middleware;
 class RouteWrapperMiddleware
 {
     public function __construct(
-        private string $name
+        private string $name,
+        private string $roleRestriction,
     ) {
     }
 
@@ -27,6 +28,6 @@ class RouteWrapperMiddleware
     private function middlewareInstance(): Middleware
     {
         $class = App::$middlewareAliases[$this->name];
-        return new $class();
+        return new $class($this->roleRestriction);
     }
 }
