@@ -1,4 +1,4 @@
-import Validation from "./Validation.js";
+import Validation from "../Models/Validation.js";
 
 const INPUTS = document.querySelectorAll("input");
 
