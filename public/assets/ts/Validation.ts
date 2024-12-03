@@ -14,19 +14,6 @@ export default class Validation
 
     /* PUBLIC METHODS ################################################# */
 
-    public testRegex(): boolean
-    {
-        const ELEMENT_VAL = (
-            this.element.getAttribute("value") ?? ""
-        );
-        if (this.regex?.test(ELEMENT_VAL))
-        {
-            return true;
-        };
-
-        return false;
-    }
-
     public runValidation(message: string = "Campo inválido!"): void
     {
         if (!this.element.value)
@@ -39,9 +26,24 @@ export default class Validation
             this.setInvalidField(message);
             return;
         }
+
+        this.setValidField();
     }
 
     /* PRIVATE METHODS ################################################ */
+
+    private testRegex(): boolean
+    {
+        const ELEMENT_VAL = (
+            this.element.value
+        );
+        if (!this.regex?.test(ELEMENT_VAL))
+        {
+            return false;
+        };
+
+        return true;
+    }
 
     private setInvalidField(message: string): void
     {
@@ -54,6 +56,19 @@ export default class Validation
 
         INVALID_FIELD.classList.add("visible");
         INVALID_FIELD.innerText = message;
+    }
+
+    private setValidField(): void
+    {
+        if (!this.element.nextElementSibling)
+        {
+            return;
+        }
+        
+        const VALID_FIELD: HTMLElement = this.element.nextElementSibling as HTMLElement;
+
+        VALID_FIELD.classList.add("invisible");
+        VALID_FIELD.innerText = "";
     }
 
 }
