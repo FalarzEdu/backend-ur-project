@@ -18,7 +18,7 @@
     "typescript-eslint": "^8.17.0"
   },
   "scripts": {
-    "lint": "eslint ./public/assets/ts/*.ts",
+    "lint": "eslint ./public/assets/ts/**/*.ts",
     "lint-fix": "eslint --fix ./public/assets/ts/*.ts",
     "tw": "tailwindcss -i ./public/assets/css/application.css -o ./public/assets/css/styles.css"
   }

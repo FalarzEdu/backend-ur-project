@@ -8,7 +8,8 @@ const menuButtons = [openMenuBtn, closeMenuBtn];
 
 menuButtons.forEach((button) => 
 {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", () => 
+    {
         Interaction.toggleDisplay(menuList);
     });
 });
