@@ -29,6 +29,7 @@ export default class Validation {
             return;
         }
         const INVALID_FIELD = this.element.nextElementSibling;
+        INVALID_FIELD.classList.remove("invisible");
         INVALID_FIELD.classList.add("visible");
         INVALID_FIELD.innerText = message;
     }
@@ -37,8 +38,8 @@ export default class Validation {
             return;
         }
         const VALID_FIELD = this.element.nextElementSibling;
+        VALID_FIELD.classList.remove("visible");
         VALID_FIELD.classList.add("invisible");
-        VALID_FIELD.innerText = "";
     }
 }
 //# sourceMappingURL=Validation.js.map

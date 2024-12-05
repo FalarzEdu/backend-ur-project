@@ -10,6 +10,6 @@ menuButtons.forEach((button) =>
 {
     button.addEventListener("click", () => 
     {
-        Interaction.toggleDisplay(menuList);
+        Interaction.toggleDisplayFlex(menuList);
     });
 });
