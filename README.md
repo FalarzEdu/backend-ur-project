@@ -94,7 +94,7 @@ $ ./run phpstan
 
 #### Acesse o projeto no navegador
 
-Acesse [localhost](http://localhost:8080)
+Acesse [localhost:8080/login](http://localhost:8080/login)
 
 #########################
 
@@ -188,4 +188,4 @@ $ ./run phpstan
 
 #### Access the project through a web navigator
 
-Access [localhost](http://localhost:8080)
+Access [localhost:8080/login](http://localhost:8080/login)
