@@ -37,5 +37,5 @@
     "skipDefaultLibCheck": true                            /* Skip type checking .d.ts files that are included with TypeScript. */
   },
   "include": ["public/assets/ts/**/*"],                   /* Include all TypeScript files in the src folder */
-  "exclude": ["node_modules"]                             /* Exclude node_modules */
+  "exclude": ["node_modules"]     
 }
