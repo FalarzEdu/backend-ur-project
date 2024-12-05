@@ -26,3 +26,6 @@
 
 # PHP dependencies
 vendor/
+
+# Yarn dependencies
+node_modules/

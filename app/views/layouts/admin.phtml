@@ -1,0 +1,44 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RU</title>
+
+    <link rel="stylesheet" href="/assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/application.css" />
+
+</head>
+
+<body class="">
+    <?php require '_flash_message.phtml'; ?>
+
+    <nav>
+        <i class="fa-solid fa-bars" id="open-menu"></i>
+
+        <ul class="lista" id="menu-list">
+            <li id="close-menu">
+                <i class="fa-solid fa-xmark"></i>
+            </li>
+            <li>
+                <i class="fa-regular fa-circle-user"></i>Perfil
+            </li>
+            <li>
+                <i class="fa-regular fa-message"></i> Feedback's
+            </li>
+            <li>
+                <i class="fa-regular fa-square-plus"></i>Cardápio
+            </li>
+            <li>
+                <a class="dropdown-item" href="<?= route(name: 'logout') ?>"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <?php require $view ?>
+</body>
+
+<script src="/assets/js/Controllers/admin.js" type="module"></script>
+
+</html>
