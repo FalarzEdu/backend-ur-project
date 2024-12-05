@@ -67,7 +67,6 @@ export default class Validation
         }
         
         const VALID_FIELD: HTMLElement = this.element.nextElementSibling as HTMLElement;
-    
         VALID_FIELD.classList.remove("visible");
         VALID_FIELD.classList.add("invisible");
     }
