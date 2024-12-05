@@ -1,37 +1,53 @@
-<html lang="pt-br">
+<html 
+    lang="pt-br"
+    class="bg-[url('/assets/images/background/backgrounf.jpg')] bg-cover bg-no-repeat"
+>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RU</title>
 
-    <link rel="stylesheet" href="/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/application.css" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
 
 </head>
 
 <body class="">
     <?php require '_flash_message.phtml'; ?>
 
-    <nav>
-        <i class="fa-solid fa-bars" id="open-menu"></i>
+<nav class="flex items-center justify-end h-1/10">
+        <i 
+            class="fa-solid fa-bars px-6 text-4xl text-white flex items-center" 
+            id="open-menu"
+        ></i>
 
-        <ul class="lista" id="menu-list">
-            <li id="close-menu">
-                <i class="fa-solid fa-xmark"></i>
+        <ul 
+            class="hidden absolute h-screen w-4/5 bg-secondary top-0 px-8 py-4 flex-col justify-start items-start gap-4" 
+            id="menu-list"
+        >
+            <li id="close-menu" class="flex items-center gap-2 text-white">
+                <i class="fa-solid fa-xmark text-2xl"></i>
             </li>
-            <li>
-                <i class="fa-regular fa-circle-user"></i>Perfil
+            <li class="flex items-center gap-2 text-white">
+                <i class="fa-regular fa-circle-user text-2xl"></i>
+                <p>Perfil</p>
             </li>
-            <li>
-                <i class="fa-regular fa-message"></i> Feedback's
+            <li class="flex items-center gap-2 text-white">
+                <i class="fa-regular fa-message text-2xl"></i>
+                <p>Feedback's</p>
             </li>
-            <li>
-                <i class="fa-regular fa-square-plus"></i>Cardápio
+            <li class="flex items-center gap-2 text-white">
+                <i class="fa-regular fa-message text-2xl"></i>
+                <p>Cardápio</p>
             </li>
-            <li>
-                <a class="dropdown-item" href="<?= route(name: 'logout') ?>"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+            <li class="flex items-center gap-2 text-white">
+                <a class="flex items-center gap-2" 
+                    href="<?= route('logout') ?>"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
+                    <p>Sair</p>
+                </a>
             </li>
         </ul>
     </nav>

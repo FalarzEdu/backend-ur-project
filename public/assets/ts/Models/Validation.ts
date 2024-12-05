@@ -54,6 +54,7 @@ export default class Validation
         
         const INVALID_FIELD: HTMLElement = this.element.nextElementSibling as HTMLElement;
 
+        INVALID_FIELD.classList.remove("invisible");
         INVALID_FIELD.classList.add("visible");
         INVALID_FIELD.innerText = message;
     }
@@ -66,9 +67,8 @@ export default class Validation
         }
         
         const VALID_FIELD: HTMLElement = this.element.nextElementSibling as HTMLElement;
-
+        VALID_FIELD.classList.remove("visible");
         VALID_FIELD.classList.add("invisible");
-        VALID_FIELD.innerText = "";
     }
 
 }

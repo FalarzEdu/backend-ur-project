@@ -5,7 +5,7 @@ const menuList = document.getElementById("menu-list");
 const menuButtons = [openMenuBtn, closeMenuBtn];
 menuButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        Interaction.toggleDisplay(menuList);
+        Interaction.toggleDisplayFlex(menuList);
     });
 });
 //# sourceMappingURL=user.js.map
