@@ -1,45 +1,43 @@
-#main-content {
-  padding-top: 5px;
-  margin-left: 250px;
+/* TAILWIND IMPORTS ####################################### */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FONTS ################################################## */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@layer components 
+{ .btn-lg 
+  {
+    @apply w-64 h-16 rounded-xl bg-white text-2xl font-semibold  shadow-md shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white
+  }
+  .btn-md
+  {
+    @apply w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white text-xl
+  }
+  .alert-message
+  {
+    @apply fixed text-white rounded-lg text-center p-2 w-4/5 bottom-4 box-border left-1/10 md:h-1/2 md:left-1/4 lg:h-28 lg:right-4
+  }
+  .alert-success
+  {
+    @apply bg-green-600
+  }
+  .alert-danger
+  {
+    @apply bg-red-700
+  }
 }
 
-nav.navbar {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: white;
-}
+@layer utilities 
+{
+  .h-1\/10
+  {
+    @apply h-[10%];
+  }
 
-.sidebar {
-  width: 250px;
-  position: fixed;
-  top: 55px;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  padding: 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.avatar {
-  width: 315px;
-  height: 315px;
-}
-
-.alert {
-  position: fixed;
-  bottom: 10px;
-  width: 80vw;
-  padding: 2vw;
-  left: 8vw;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-  font-weight: 900;
-}
-
-.alert-danger {
-  background-color: #d9534f;
-}
-
-.alert-success {
-  background-color: #5cb85c;
+  .left-1\/10
+  {
+    @apply left-[10%]
+  }
 }

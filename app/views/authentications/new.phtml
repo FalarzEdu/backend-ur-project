@@ -1,15 +1,55 @@
-<div class="background">
-    <form action="<?= Route(name: 'authenticate.login') ?>" method="POST">
-        <div class="form-group mb-3">
-            <label for="user_email" class="form-label">Email</label>
-            <input id="user_email" type="email" name="user[email]" class="form-control" placeholder="Enter email">
+<div 
+    class="w-full h-full flex items-center justify-center"
+>
+    <form 
+        action="<?= Route(name: 'authenticate.login') ?>" 
+        method="POST"
+        class="w-3/4 flex flex-col justify-center items-center"
+    >
+        <div 
+            class="visible w-full h-fit rounded-lg text-sm mb-6"
+        >
+            <label 
+                for="user_email" 
+                class="text-white text-lg pb-4 pl-2"
+            >
+                Email
+            </label>
+            <input 
+                id="user_email" 
+                type="email" 
+                name="user[email]" 
+                class="w-full h-12 rounded-xl bg-white/40 pl-2 outline-white/30 outline-2 focus:outline text-black text-base placeholder-gray-800 shadow-lg shadow-black/50 font-semibold" 
+                placeholder="Enter email" 
+                pattern="^[^@]+@[^@]+\.[^@]+$"
+            >
+            <small class="invalid-field-text text-white text-sm pl-1 invisible pt-2">Campo inválido!</small>
         </div>
-        <div class="form-group mb-3">
-            <label for="user_password" class="form-label">Senha</label>
-            <input id="user_password" type="password" name="user[password]" class="form-control" placeholder="Password">
+        <div 
+            class="visible w-full h-fit rounded-lg text-sm"
+        >
+            <label for="user_password" class="text-white text-lg pb-4 pl-2"
+            >
+            Senha
+            </label>
+            <input
+                id="user_password"
+                type="password" 
+                name="user[password]" 
+                class="w-full h-12 rounded-xl bg-white/40 pl-2 outline-white/30 outline-2 focus:outline text-black text-base placeholder-gray-800 shadow-lg shadow-black/50 font-semibold"
+                placeholder="Sua senha"
+            >
+            <small class="invalid-field-text text-white text-sm pl-1 invisible pt-2"
+            >
+                Campo inválido!
+            </small>
         </div>
-        <div class="d-grid">
-            <input type="submit" class="btn btn-primary btn-block" value="Entrar">
+        <div class="w-4/5 flex justify-center mt-32">
+            <input 
+                type="submit" 
+                class="btn-md bg-primary text-white hover:scale-105 transition-all" 
+                value="Entrar"
+            >
         </div>
     </form>
 </div>
