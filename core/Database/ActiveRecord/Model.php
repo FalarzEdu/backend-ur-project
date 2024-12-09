@@ -311,7 +311,10 @@ abstract class Model
         $attributes = implode(', ', static::$columns);
 
         $sql = <<<SQL
-            SELECT id, {$attributes} FROM {$table} WHERE 
+            SELECT id, 
+            {$attributes} 
+            FROM {$table}
+            WHERE 
         SQL;
 
         $sqlConditions = array_map(function ($column) {
@@ -335,6 +338,13 @@ abstract class Model
             $models[] = new static($row);
         }
         return $models;
+    }
+
+    public function join(array $join): void
+    {
+        foreach ($join as $table => $foreign_key) {
+            $this->join .= "JOIN $table USING ($foreign_key)";
+        }
     }
 
     /**

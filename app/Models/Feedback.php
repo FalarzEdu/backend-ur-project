@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\BelongsToMany;
 use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
@@ -19,6 +20,7 @@ use DateTime;
  */
 class Feedback extends Model
 {
+    protected ?int $id = null;
     protected ?int $rating = null;
     protected ?int $status_id = 1; // Open
     protected ?string $created_on = null;
@@ -26,8 +28,18 @@ class Feedback extends Model
 
     public function __construct(array $params = [])
     {
-        $this->created_on = (new DateTime())->format(format: 'Y-m-d H:i:s');
+        $this->created_on = (new DateTime())->format(
+            format: 'Y-m-d H:i:s'
+        );
         parent::__construct(params: $params);
+    }
+    
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: User::class, 
+            foreignKey: 'id_user'
+        );
     }
 
     protected static string $table = 'feedbacks';

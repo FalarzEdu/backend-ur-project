@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Feedback;
+use App\Models\Message;
 use Core\Http\Controllers\Controller;
 use Core\Constants\Constants;
 use Core\Debug\Debugger;
@@ -21,10 +22,10 @@ class FeedbacksController extends Controller
 
     public function index(): void
     {
-        $feedbacks = $this->current_user()->feedbacks()->get();
+        $openFeedbacks = $this->current_user()->feedbacks()->get();
         $title = 'Feedbacks registrados';
 
-        $this->render(view: 'feedbacks/index', data: compact(  'feedbacks', 'title'));
+        $this->render(view: 'feedbacks/index', data: compact(  'title', 'openFeedbacks'));
     }
 
     public function new(): void
@@ -36,22 +37,39 @@ class FeedbacksController extends Controller
 
     public function create(Request $request): void
     {
-        $params = $request->getParam(key: 'feedback');
+        $feedbackParams = $request->getParam(key: 'feedback');
 
-        if (!empty($params['rating'])) {
-            $params['rating'] = (int) $params['rating'];
+        if (!empty($feedbackParams['rating'])) {
+            $feedbackParams['rating'] = (int) $feedbackParams['rating'];
         }
-        $params['is_harmfull'] = (int) $params['is_harmfull'];
-        $params['id_user'] = $this->current_user()->id;
+        $feedbackParams['is_harmfull'] = (int) $feedbackParams['is_harmfull'];
+        $feedbackParams['id_user'] = $this->current_user()->id;
+        $feedback = new Feedback(params: $feedbackParams);
 
-        $feedback = new Feedback(params: $params);
-
-        if ($feedback->save()) {
-            FlashMessage::success(value: 'Feedback criado com sucesso!');
+        if (!$feedback->save()) {
+            FlashMessage::danger(value: 'Error creating feedback!');
             $this->redirectTo(location: Route(name: 'feedbacks'));
-        } else {
-            FlashMessage::danger(value: 'Erro ao criar feedback!');
-            $this->redirectTo(location: Route(name: 'user.feedbacks.new'));
+            throw new \Exception(message: 'Feedback could not be saved.');
+        }
+
+        $messageParams = $request->getParam(key: 'message');
+        $messageParams['sender_id'] = $this->current_user()->id;
+        $messageParams['sender_type'] = substr(
+            string: strrchr(haystack: $this->current_user()::class, needle: '\\'),
+            offset: 1
+        );
+        $messageParams['feedback_id'] = $feedback->__get(property: 'id');
+        $message = new Message(params: $messageParams);
+
+        if (!$message->save()) {
+            FlashMessage::danger(value: "Error creating feedback's message!");
+            $this->redirectTo(location: Route(name: 'feedbacks'));
+            throw new \Exception(message: 'Feedback could not be saved.');
+        }
+        
+        else {
+            FlashMessage::success(value: 'Feedback created successfully!');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
         }
     }
 

@@ -32,11 +32,6 @@ class User extends Model
         );
     }
 
-    // public function reinforcedProblems(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Problem::class, 'problem_user_reinforce', 'user_id', 'problem_id');
-    // }
-
     public function validates(): void
     {
         Validations::notEmpty(attribute: 'name', obj: $this);
