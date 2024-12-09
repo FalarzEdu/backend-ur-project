@@ -1,1 +1,11 @@
+<div>
+    <?php foreach($feedbacks as $feedback): ?>
+        <div>
+            <h2><?= $feedback->type ?></h2>
+            <p><?= $feedback->rating ?></p>
+            <p><?= $feedback->created_on ?></p>
+        </div>
+    <?php endforeach; ?>
+</div>
+
 <a href="<?= Route(name: 'user.feedbacks.new') ?>" class="btn-md bg-primary">NOVO</a>

@@ -21,14 +21,17 @@ class FeedbacksController extends Controller
 
     public function index(): void
     {
-        $this->render(view: 'index');
+        $feedbacks = $this->current_user()->feedbacks()->get();
+        $title = 'Feedbacks registrados';
+
+        $this->render(view: 'feedbacks/index', data: compact(  'feedbacks', 'title'));
     }
 
     public function new(): void
     {
         $title = 'Criar um feedback';
 
-        $this->render(view:'new', data: compact(var_name: 'title'));
+        $this->render(view:'feedbacks/new', data: compact(var_name: 'title'));
     }
 
     public function create(Request $request): void
@@ -52,16 +55,16 @@ class FeedbacksController extends Controller
         }
     }
 
-    protected function render(string $view, array $data = []): void
-    {
-        extract(array: $data);
+    // protected function render(string $view, array $data = []): void
+    // {
+    //     extract(array: $data);
 
-        $view = Constants::rootPath()->join(
-            path: "app/views/feedbacks/$view.phtml"
-        );
-        require Constants::rootPath()->join(
-            path: "app/views/layouts/$this->layout.phtml"
-        );
-    }
+    //     $view = Constants::rootPath()->join(
+    //         path: "app/views/feedbacks/$view.phtml"
+    //     );
+    //     require Constants::rootPath()->join(
+    //         path: "app/views/layouts/$this->layout.phtml"
+    //     );
+    // }
 
 }

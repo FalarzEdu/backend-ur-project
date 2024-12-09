@@ -25,10 +25,12 @@ class User extends Model
     protected ?string $password = null;
     protected ?string $password_confirmation = null;
 
-    // public function problems(): HasMany
-    // {
-    //     return $this->hasMany(Problem::class, 'user_id');
-    // }
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(
+            related: Feedback::class, foreignKey: 'id_user'
+        );
+    }
 
     // public function reinforcedProblems(): BelongsToMany
     // {
