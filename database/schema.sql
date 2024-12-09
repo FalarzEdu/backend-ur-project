@@ -135,6 +135,8 @@ CREATE TABLE `feedback_status` (
   `status` varchar(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `feedback_status` (`id`, `status`) VALUES (1, 'Open'), (2, 'Closed');
+
 -- --------------------------------------------------------
 
 --
