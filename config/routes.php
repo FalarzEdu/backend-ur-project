@@ -18,6 +18,9 @@ Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
 
     /* POST */
     Route::post(uri: '/feedbacks/create', action: [FeedbacksController::class, 'create'])->name(name: 'user.feedbacks.create');
+
+    /* DELETE */
+    Route::delete(uri: '/feedbacks/delete/{id}', action: [FeedbacksController::class,'destroy'])->name('user.feedbacks.delete');
 });
 
 /* Admin protected routes ################################ */

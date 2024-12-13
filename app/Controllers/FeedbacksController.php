@@ -76,6 +76,18 @@ class FeedbacksController extends Controller
         }
     }
 
+    public function destroy(Request $request): void
+    {
+        $paramId = $request->getParam(key: 'id');
+        $feedback = $this->current_user()->feedbacks()->findById(id: $paramId);
+        $feedback->destroy();
+
+        if (!$feedback::findById($paramId)) {
+            FlashMessage::success(value:'Registro deletado com sucesso.');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
+        }
+    }
+
     // protected function render(string $view, array $data = []): void
     // {
     //     extract(array: $data);
