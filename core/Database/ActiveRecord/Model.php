@@ -340,13 +340,6 @@ abstract class Model
         return $models;
     }
 
-    public function join(array $join): void
-    {
-        foreach ($join as $table => $foreign_key) {
-            $this->join .= "JOIN $table USING ($foreign_key)";
-        }
-    }
-
     /**
      * @param array<string, mixed> $conditions
      */
