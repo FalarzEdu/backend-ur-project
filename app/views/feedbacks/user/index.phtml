@@ -1,0 +1,24 @@
+<div>
+    <?php foreach($openFeedbacks as $feedback): ?>
+        <div>
+            <h2><?= $feedback->type ?></h2>
+            <p><?= $feedback->rating ?></p>
+            <p><?= $feedback->created_on ?></p>
+            <form 
+            action="
+                <?= 
+                    Route(
+                        name: 'user.feedbacks.delete',
+                        params: ['id' => $feedback->id]
+                    )
+                ?>" 
+            method="POST"
+            >
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn-md bg-primary" >DELETE</button>
+            </form>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<a href="<?= Route(name: 'user.feedbacks.new') ?>" class="btn-md bg-primary">NOVO</a>

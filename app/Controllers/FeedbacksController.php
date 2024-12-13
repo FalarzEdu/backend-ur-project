@@ -14,20 +14,27 @@ use Lib\FlashMessage;
 class FeedbacksController extends Controller
 {
     protected string $layout;
-    private string $index_folder;
 
     public function __construct()
     {
         $this->layout = $this->current_user_role();
-        $this->index_folder = $this->current_user_role();
     }
 
     public function index(): void
     {
-        $openFeedbacks = $this->current_user()->feedbacks()->get();
         $title = 'Feedbacks registrados';
+        $index_folder = $this->layout;
+        
+        if ($this->layout === 'admin') {
+            $openFeedbacks = [];
+        } else {
+            $openFeedbacks = $this->current_user()->feedbacks()->get();
+        }
 
-        $this->render(view: "feedbacks/$this->index_folder/index", data: compact(  'title', 'openFeedbacks'));
+        $this->render(
+            "feedbacks/$index_folder/index", 
+            data: compact('title','openFeedbacks')
+        );
     }
 
     public function new(): void
