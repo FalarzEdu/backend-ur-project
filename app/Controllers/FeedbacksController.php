@@ -53,9 +53,7 @@ class FeedbacksController extends Controller
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
         }
-
         $messageParams = $request->getParam(key: 'message');
-        $messageParams['sender_id'] = $this->current_user()->id;
         $messageParams['sender_type'] = $this->current_user_role();
         $messageParams['feedback_id'] = $feedback->__get(property: 'id');
         $message = new Message(params: $messageParams);

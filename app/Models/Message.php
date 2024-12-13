@@ -9,7 +9,7 @@ use Lib\Validations;
 /**
  * @property int $feedback_id;
  * @property string $content;
- * @property int $sender_id;
+ * @property int $admin_id;
  * @property Model $sender_type;
  * @property bool $is_external;
  * @property string $created_on;
@@ -22,7 +22,7 @@ class Message extends Model
     protected static array $columns = [
         'feedback_id',
         'content', 
-        'sender_id',
+        'admin_id',
         'sender_type',
         'is_external',
         'created_on',
@@ -47,7 +47,6 @@ class Message extends Model
 
     public function validates(): void
     {
-        Validations::notEmpty(attribute: 'sender_id', obj: $this);
         Validations::notEmpty(attribute: 'sender_type', obj: $this);
     }
 

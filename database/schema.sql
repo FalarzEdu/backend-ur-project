@@ -209,7 +209,7 @@ CREATE TABLE `messages` (
   `id` int UNSIGNED NOT NULL,
   `feedback_id` int UNSIGNED NOT NULL,
   `content` text NOT NULL,
-  `sender_id` int UNSIGNED NOT NULL,
+  `admin_id` int UNSIGNED,
   `sender_type` enum('user','admin') NOT NULL,
   `is_external` tinyint(1) NOT NULL DEFAULT '0',
   `created_on` datetime DEFAULT NULL,
@@ -371,7 +371,7 @@ ALTER TABLE `menus`
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD KEY `feedback_id` (`feedback_id`),
-  ADD KEY `sender_id` (`sender_id`);
+  ADD KEY `admin_id` (`admin_id`);
 
 --
 -- Indexes for table `payment_type`
@@ -570,8 +570,8 @@ ALTER TABLE `meal_statistics`
 -- Constraints for table `messages`
 --
 ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`feedback_id`) REFERENCES `feedbacks` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `messages` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`feedback_id`) REFERENCES `feedbacks` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `snackbar_goods_reservation`
