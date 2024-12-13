@@ -14,10 +14,12 @@ use Lib\FlashMessage;
 class FeedbacksController extends Controller
 {
     protected string $layout;
+    private string $index_folder;
 
     public function __construct()
     {
         $this->layout = $this->current_user_role();
+        $this->index_folder = $this->current_user_role();
     }
 
     public function index(): void
@@ -25,7 +27,7 @@ class FeedbacksController extends Controller
         $openFeedbacks = $this->current_user()->feedbacks()->get();
         $title = 'Feedbacks registrados';
 
-        $this->render(view: 'feedbacks/index', data: compact(  'title', 'openFeedbacks'));
+        $this->render(view: "feedbacks/$this->index_folder/index", data: compact(  'title', 'openFeedbacks'));
     }
 
     public function new(): void
@@ -54,10 +56,7 @@ class FeedbacksController extends Controller
 
         $messageParams = $request->getParam(key: 'message');
         $messageParams['sender_id'] = $this->current_user()->id;
-        $messageParams['sender_type'] = substr(
-            string: strrchr(haystack: $this->current_user()::class, needle: '\\'),
-            offset: 1
-        );
+        $messageParams['sender_type'] = $this->current_user_role();
         $messageParams['feedback_id'] = $feedback->__get(property: 'id');
         $message = new Message(params: $messageParams);
 
@@ -66,7 +65,6 @@ class FeedbacksController extends Controller
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
         }
-        
         else {
             FlashMessage::success(value: 'Feedback created successfully!');
             $this->redirectTo(location: Route(name: 'feedbacks'));
