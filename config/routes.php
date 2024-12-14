@@ -17,7 +17,7 @@ Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
     Route::get(uri: '/feedbacks/create', action: [FeedbacksController::class, 'new'])->name(name: 'user.feedbacks.new');
 
     /* POST */
-    Route::post(uri: '/feedbacks/create', action: [FeedbacksController::class, 'create'])->name(name: 'user.feedbacks.create');
+    Route::post(uri: '/feedbacks/user/create', action: [FeedbacksController::class, 'create'])->name(name: 'user.feedbacks.create');
 
     /* DELETE */
     Route::delete(uri: '/feedbacks/delete/{id}', action: [FeedbacksController::class,'destroy'])->name('user.feedbacks.delete');
