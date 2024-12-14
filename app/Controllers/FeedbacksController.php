@@ -79,13 +79,35 @@ class FeedbacksController extends Controller
     public function destroy(Request $request): void
     {
         $paramId = $request->getParam(key: 'id');
-        $feedback = $this->current_user()->feedbacks()->findById(id: $paramId);
-        $feedback->destroy();
-
-        if (!$feedback::findById($paramId)) {
-            FlashMessage::success(value:'Registro deletado com sucesso.');
-            $this->redirectTo(location: Route(name: 'feedbacks'));
+        
+        if ($paramId) {
+            $feedback = $this
+                        ->current_user()
+                        ->feedbacks()
+                        ->findById(id: $paramId);
+        } else {
+            FlashMessage::danger(
+                value:'O registro não foi encontrado.'
+            );
         }
+
+        if ($feedback) {
+            $feedback->destroy();
+
+            if (!$feedback::findById(id: $paramId)) {
+                FlashMessage::success(value:'Registro deletado com sucesso.');
+            } else {
+                FlashMessage::danger(
+                    value:'Um erro ocorreu na tentativa de deletar este registro. Tente novamente!'
+                );
+            }
+        } else {
+            FlashMessage::danger(
+                value:'O registro não foi encontrado.'
+            );
+        }
+
+        $this->redirectTo(location: Route(name: 'feedbacks'));
     }
 
     // protected function render(string $view, array $data = []): void
