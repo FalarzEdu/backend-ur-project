@@ -2,51 +2,55 @@
 
 use Core\Router\Route;
 ?>
-<form 
+<form
     action="<?= Route(name: 'user.feedbacks.create') ?>"
     method="POST"
-    class="text-white"
->
+    class="flex flex-col gap-8 items-start w-1/2 mx-auto min-h-screen text-white">
+    <p class="text-sm">Campos com * são obrigatórios</p>
     <div>
-        <label for="feedback-type-complaint">Complaint</label>
-        <input type="radio" name="feedback[type]" id="feedback-type-complaint" value="complaint">
-        <label for="feedback-type-compliment">compliment</label>
-        <input type="radio" name="feedback[type]" id="feedback-type-compliment" value="compliment">
-        <label for="feedback-type-question">question</label>
-        <input type="radio" name="feedback[type]" id="feedback-type-question" value="question">
-        <label for="feedback-type-suggestion">suggestion</label>
-        <input type="radio" name="feedback[type]" id="feedback-type-suggestion" value="suggestion">
+        <h3 class="text-xl">Tipo *</h3>
+        <select name="feedback[type]" class="bg-tertiary w-48 h-9 rounded px-2">
+            <option value="Complaint">Reclamação</option>
+            <option value="compliment">elogio</option>
+            <option value="question">Pergunta</option>
+            <option value="suggestion">Sugestão</option>
+        </select>
     </div>
 
     <div>
-        <label for="rating-one">1</label>
-        <input type="radio" name="feedback[rating]" id="rating-one" value="1">
-
-        <label for="rating-two">2</label>
-        <input type="radio" name="feedback[rating]" id="rating-two" value="2">
-
-        <label for="rating-three">3</label>
-        <input type="radio" name="feedback[rating]" id="rating-three" value="3">
-
-        <label for="rating-four">4</label>
-        <input type="radio" name="feedback[rating]" id="rating-four" value="4">
-
-        <label for="rating-five">5</label>
-        <input type="radio" name="feedback[rating]" id="rating-five" value="5">
+        <h3 class="text-xl">Avaliação *</h3>
+        <div class=" flex justify-between w-48">
+            <label for="rating-one" class="text-xl">1</label>
+            <input type="radio" name="feedback[rating]" id="rating-one" value="1">
+    
+            <label for="rating-two">2</label>
+            <input type="radio" name="feedback[rating]" id="rating-two" value="2">
+    
+            <label for="rating-three">3</label>
+            <input type="radio" name="feedback[rating]" id="rating-three" value="3">
+    
+            <label for="rating-four">4</label>
+            <input type="radio" name="feedback[rating]" id="rating-four" value="4">
+    
+            <label for="rating-five">5</label>
+            <input type="radio" name="feedback[rating]" id="rating-five" value="5">
+        </div>
     </div>
 
     <div>
-        <textarea name="message[content]" id="message_content"></textarea>
+        <h2 class="text-xl">Descrição *</h2>
+        <textarea name="message[content]" id="message_content" class="bg-tertiary rounded p-2"></textarea>
     </div>
 
     <div>
-        <label for="is-harmfull-yes">Sim</label>
+        <label for="is-harmfull-yes" class="text-xl">Sim</label>
         <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-yes" value="1">
 
-        <label for="is-harmfull-no">Não</label>
+        <label for="is-harmfull-no" class="text-xl">Não</label>
         <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-no" value="0">
     </div>
-
-    <button type="submit">CRIAR</button>
+    <div class="flex justify-center w-48">
+        <button type="submit" class="bg-primary w-20 h-9 rounded">CRIAR</button>
+    </div>
 
 </form>
