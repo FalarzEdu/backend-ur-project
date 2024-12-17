@@ -19,6 +19,10 @@ Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
     /* POST */
     Route::post(uri: '/feedbacks/user/create', action: [FeedbacksController::class, 'create'])->name(name: 'user.feedbacks.create');
 
+    /* UPDATE */
+    Route::get(uri: '/feedbacks/{id}/edit', action: [FeedbacksController::class, 'edit'])->name(name: 'user.feedbacks.edit');
+    Route::put(uri: '/feedbacks/{id}', action: [FeedbacksController::class, 'update'])->name(name: 'user.feedbacks.update');
+
     /* DELETE */
     Route::delete(uri: '/feedbacks/delete/{id}', action: [FeedbacksController::class,'destroy'])->name('user.feedbacks.delete');
 });
