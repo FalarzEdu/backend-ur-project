@@ -75,6 +75,28 @@ class FeedbacksController extends Controller
         }
     }
 
+    public function edit(Request $request):void {
+        $paramId = $request->getParam(key: 'id');
+
+        $title = "Editar feedback #{$paramId}";
+        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId'));
+    }
+
+    public function update(Request $request):void {
+        $id = $request->getParam('id');
+        $params = $request->getParam('feedback');
+
+        $feedback = $this->currentUser()->feedbacks()->findById($id);
+
+        if ($feedback->update($params)) {
+            FlashMessage::success('Problema atualizado com sucesso!');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
+        } else {
+            FlashMessage::success(value: 'Feedback created successfully!');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
+        }
+    }
+
     public function destroy(Request $request): void
     {
         $paramId = $request->getParam(key: 'id');
