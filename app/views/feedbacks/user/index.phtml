@@ -1,22 +1,29 @@
 <div>
-    <?php foreach($openFeedbacks as $feedback): ?>
+    <?php
+
+    use Core\Router\Route;
+
+    foreach ($openFeedbacks as $feedback): ?>
         <div>
+            <h2><?= $feedback->id ?></h2>
             <h2><?= $feedback->type ?></h2>
             <p><?= $feedback->rating ?></p>
             <p><?= $feedback->created_on ?></p>
-            <form 
+            <form
             action="
-                <?= 
-                    Route(
-                        name: 'user.feedbacks.delete',
-                        params: ['id' => $feedback->id]
+            <?=
+                Route(
+                    name: 'user.feedbacks.delete',
+                    params: ['id' => $feedback->id]
                     )
-                ?>" 
-            method="POST"
-            >
+                    ?>"
+                method="POST">
                 <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" class="btn-md bg-primary" >Deletar</button>
+                <button type="submit" class="btn-md bg-primary">Deletar</button>
             </form>
+            <a href="<?= route('user.feedbacks.edit', params: ['id' => $feedback->id]) ?>">
+                Editar 2
+            </a>
         </div>
     <?php endforeach; ?>
 </div>
