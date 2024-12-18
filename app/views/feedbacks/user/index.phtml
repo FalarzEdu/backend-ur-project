@@ -24,6 +24,9 @@
                     <button type="submit" class="px-4 py-2 rounded text-red-500"><i class="fa-regular fa-trash-can text-lg leading-none"></i></button>
                 </form>
             </div>
+            </a>
+                Editar 2
+            <a href="<?= route('user.feedbacks.edit', params: ['id' => $feedback->id]) ?>">
         </div>
     <?php endforeach; ?>
 </div>

@@ -1,0 +1,61 @@
+<form 
+    action="<?= route('user.feedbacks.update', ['id' => $paramId]) ?>" method="POST" class="text-white"
+>
+    <input type="hidden" name="_method" value="PUT">
+    
+    <div>
+        <label for="feedback-type-complaint">Complaint</label>
+        <input type="radio" name="feedback[type]" id="feedback-type-complaint" value="complaint" 
+            <?= $feedback->type === 'complaint' ? 'checked' : '' ?>>
+
+        <label for="feedback-type-compliment">Compliment</label>
+        <input type="radio" name="feedback[type]" id="feedback-type-compliment" value="compliment" 
+            <?= $feedback->type === 'compliment' ? 'checked' : '' ?>>
+
+        <label for="feedback-type-question">Question</label>
+        <input type="radio" name="feedback[type]" id="feedback-type-question" value="question" 
+            <?= $feedback->type === 'question' ? 'checked' : '' ?>>
+
+        <label for="feedback-type-suggestion">Suggestion</label>
+        <input type="radio" name="feedback[type]" id="feedback-type-suggestion" value="suggestion" 
+            <?= $feedback->type === 'suggestion' ? 'checked' : '' ?>>
+    </div>
+
+    <div>
+        <label for="rating-one">1</label>
+        <input type="radio" name="feedback[rating]" id="rating-one" value="1" 
+            <?= $feedback->rating === 1 ? 'checked' : '' ?>>
+
+        <label for="rating-two">2</label>
+        <input type="radio" name="feedback[rating]" id="rating-two" value="2" 
+            <?= $feedback->rating === 2 ? 'checked' : '' ?>>
+
+        <label for="rating-three">3</label>
+        <input type="radio" name="feedback[rating]" id="rating-three" value="3" 
+            <?= $feedback->rating === 3 ? 'checked' : '' ?>>
+
+        <label for="rating-four">4</label>
+        <input type="radio" name="feedback[rating]" id="rating-four" value="4" 
+            <?= $feedback->rating === 4 ? 'checked' : '' ?>>
+
+        <label for="rating-five">5</label>
+        <input type="radio" name="feedback[rating]" id="rating-five" value="5" 
+            <?= $feedback->rating === 5 ? 'checked' : '' ?>>
+    </div>
+
+    <div>
+        <textarea name="message[content]" id="message_content"></textarea>
+    </div>
+
+    <div>
+        <label for="is-harmfull-yes">Sim</label>
+        <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-yes" value="1" 
+            <?= $feedback->is_harmfull === 1 ? 'checked' : '' ?>>
+
+        <label for="is-harmfull-no">Não</label>
+        <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-no" value="0" 
+            <?= $feedback->is_harmfull === 0 ? 'checked' : '' ?>>
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>

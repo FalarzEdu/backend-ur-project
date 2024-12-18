@@ -17,7 +17,7 @@ class FeedbacksController extends Controller
 
     public function __construct()
     {
-        $this->layout = $this->currentUserRole();
+        $this->layout = $this->currentUseRole();
     }
 
     public function index(): void
@@ -41,7 +41,7 @@ class FeedbacksController extends Controller
     {
         $title = 'Criar um feedback';
 
-        $this->render(view:'feedbacks/new', data: compact(var_name: 'title'));
+        $this->render(view:'feedbacks/user/new', data: compact(var_name: 'title'));
     }
 
     public function create(Request $request): void
@@ -61,7 +61,7 @@ class FeedbacksController extends Controller
             throw new \Exception(message: 'Feedback could not be saved.');
         }
         $messageParams = $request->getParam(key: 'message');
-        $messageParams['sender_type'] = $this->currentUserRole();
+        $messageParams['sender_type'] = $this->currentUseRole();
         $messageParams['feedback_id'] = $feedback->__get(property: 'id');
         $message = new Message(params: $messageParams);
 
@@ -75,52 +75,41 @@ class FeedbacksController extends Controller
         }
     }
 
+    public function edit(Request $request): void
+    {
+        $params = $request->getParams();
+        $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
+        $paramId = $request->getParam(key: 'id');
+
+        $title = "Editar feedback #{$paramId}";
+        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback'));
+    }
+
+    public function update(Request $request): void
+    {
+        $id = $request->getParam('id');
+        $params = $request->getParam('feedback');
+
+        $feedback = $this->currentUser()->feedbacks()->findById($id);
+
+        if ($feedback->update($params)) {
+            FlashMessage::success('Problema atualizado com sucesso!');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
+        } else {
+            FlashMessage::success(value: 'Feedback created successfully!');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
+        }
+    }
+
     public function destroy(Request $request): void
     {
         $paramId = $request->getParam(key: 'id');
-        $feedback = $this
-                        ->currentUser()
-                        ->feedbacks()
-                        ->findById(id: $paramId);
-        if ($paramId) {
-            $feedback = $this
-                        ->currentUser()
-                        ->feedbacks()
-                        ->findById(id: $paramId);
-        } else {
-            FlashMessage::danger(
-                value:'O registro não foi encontrado.'
-            );
+        $feedback = $this->currentUser()->feedbacks()->findById(id: $paramId);
+        $feedback->destroy();
+
+        if (!$feedback::findById($paramId)) {
+            FlashMessage::success(value:'Registro deletado com sucesso.');
+            $this->redirectTo(location: Route(name: 'feedbacks'));
         }
-
-        if ($feedback) {
-            $feedback->destroy();
-
-            if (!$feedback::findById(id: $paramId)) {
-                FlashMessage::success(value:'Registro deletado com sucesso.');
-            } else {
-                FlashMessage::danger(
-                    value:'Um erro ocorreu na tentativa de deletar este registro. Tente novamente!'
-                );
-            }
-        } else {
-            FlashMessage::danger(
-                value:'O registro não foi encontrado.'
-            );
-        }
-
-        $this->redirectTo(location: Route(name: 'feedbacks'));
     }
-
-    // protected function render(string $view, array $data = []): void
-    // {
-    //     extract(array: $data);
-
-    //     $view = Constants::rootPath()->join(
-    //         path: "app/views/feedbacks/$view.phtml"
-    //     );
-    //     require Constants::rootPath()->join(
-    //         path: "app/views/layouts/$this->layout.phtml"
-    //     );
-    // }
 }
