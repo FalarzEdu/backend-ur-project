@@ -9,6 +9,9 @@ class Database
 {
     public static function getDatabaseConn(): PDO
     {
+
+        date_default_timezone_set(timezoneId: 'America/Sao_Paulo');
+
         $user = $_ENV['DB_USERNAME'];
         $pwd  = $_ENV['DB_PASSWORD'];
         $host = $_ENV['DB_HOST'];

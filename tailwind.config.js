@@ -15,6 +15,7 @@ module.exports = {
         'bg-secondary': '#6a4731',
         'primary': '#774972',
         'secondary': '#6a4731',
+        'tertiary': '#8E5C3C'
       },
       fontFamily: 
       {

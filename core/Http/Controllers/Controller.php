@@ -2,28 +2,36 @@
 
 namespace Core\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Core\Constants\Constants;
 use Lib\Authentication\Auth;
 
 class Controller
 {
+    protected ?USer $currentUser = null;
+
     protected string $layout = 'application';
 
-    // protected ?User $current_user = null;
+    public function __construct()
+    {
+        $this->currentUser = Auth::user();
+    }
+
+    // protected ?User $currentUser = null;
 
     // public function __construct()
     // {
-    //     $this->current_user = Auth::user();
+    //     $this->currentUser = Auth::user();
     // }
 
     // public function currentUser(): ?User
     // {
-    //     if ($this->current_user === null) {
-    //         $this->current_user = Auth::user();
+    //     if ($this->currentUser === null) {
+    //         $this->currentUser = Auth::user();
     //     }
 
-    //     return $this->current_user;
+    //     return $this->currentUser;
     // }
 
     /**
@@ -37,6 +45,19 @@ class Controller
         require Constants::rootPath()->join('app/views/layouts/' . $this->layout . '.phtml');
     }
 
+    public function currentUser(): User | Admin
+    {
+        if ($this->currentUser === null) {
+            $this->currentUser = Auth::user();
+        }
+
+        return $this->currentUser;
+    }
+
+    public function currentUserRole(): string
+    {
+        return Auth::getRole();
+    }
 
     /**
      * @param array<string, mixed> $data
