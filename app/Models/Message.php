@@ -10,7 +10,7 @@ use Lib\Validations;
  * @property int $feedback_id;
  * @property string $content;
  * @property int $admin_id;
- * @property Model $sender_type;
+ * @property string $sender_type;
  * @property bool $is_external;
  * @property string $created_on;
  * @property string $updated_on;
@@ -48,5 +48,6 @@ class Message extends Model
     public function validates(): void
     {
         Validations::notEmpty(attribute: 'sender_type', obj: $this);
+        Validations::notEmpty(attribute: 'feedback_id', obj: $this);
     }
 }
