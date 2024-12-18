@@ -41,6 +41,13 @@ class Feedback extends Model
             foreignKey: 'id_user'
         );
     }
+    public function messages(): HasMany
+    {
+        return $this->hasMany(
+            related: Message::class,
+            foreignKey: 'feedback_id'
+        );
+    }
 
     protected static string $table = 'feedbacks';
     protected static array $columns = [

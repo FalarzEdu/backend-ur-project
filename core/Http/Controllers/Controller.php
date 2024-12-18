@@ -9,7 +9,7 @@ use Lib\Authentication\Auth;
 
 class Controller
 {
-    protected ?USer $currentUser = null;
+    protected Admin | User | null $currentUser = null;
 
     protected string $layout = 'application';
 
@@ -54,7 +54,7 @@ class Controller
         return $this->currentUser;
     }
 
-    public function currentUserRole(): string
+    public function currentUseRole(): string
     {
         return Auth::getRole();
     }
