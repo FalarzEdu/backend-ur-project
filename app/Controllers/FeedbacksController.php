@@ -75,14 +75,18 @@ class FeedbacksController extends Controller
         }
     }
 
-    public function edit(Request $request):void {
+    public function edit(Request $request): void
+    {
+        $params = $request->getParams();
+        $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
         $paramId = $request->getParam(key: 'id');
 
         $title = "Editar feedback #{$paramId}";
-        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId'));
+        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback'));
     }
 
-    public function update(Request $request):void {
+    public function update(Request $request): void
+    {
         $id = $request->getParam('id');
         $params = $request->getParam('feedback');
 
