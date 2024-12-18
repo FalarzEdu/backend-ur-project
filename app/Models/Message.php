@@ -21,7 +21,7 @@ class Message extends Model
 
     protected static array $columns = [
         'feedback_id',
-        'content', 
+        'content',
         'admin_id',
         'sender_type',
         'is_external',
@@ -36,7 +36,7 @@ class Message extends Model
     protected ?string $created_on = null;
     protected ?string $updated_on = null;
 
-    public function _construct(array $params): void
+    public function __construct(array $params)
     {
         $this->feedback_id = $params['feedback_id'];
         $this->created_on = (new DateTime())->format(
@@ -49,5 +49,4 @@ class Message extends Model
     {
         Validations::notEmpty(attribute: 'sender_type', obj: $this);
     }
-
 }

@@ -33,17 +33,25 @@ class Feedback extends Model
         );
         parent::__construct(params: $params);
     }
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(
-            related: User::class, 
+            related: User::class,
             foreignKey: 'id_user'
         );
     }
 
     protected static string $table = 'feedbacks';
-    protected static array $columns = ['type', 'id_user', 'rating', 'status_id', 'created_on', 'updated_on', 'is_harmfull'];
+    protected static array $columns = [
+        'type',
+        'id_user',
+        'rating',
+        'status_id',
+        'created_on',
+        'updated_on',
+        'is_harmfull'
+    ];
 
     // public function problems(): HasMany
     // {

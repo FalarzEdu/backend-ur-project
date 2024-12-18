@@ -28,7 +28,8 @@ class User extends Model
     public function feedbacks(): HasMany
     {
         return $this->hasMany(
-            related: Feedback::class, foreignKey: 'id_user'
+            related: Feedback::class,
+            foreignKey: 'id_user'
         );
     }
 

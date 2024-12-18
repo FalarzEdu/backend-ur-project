@@ -17,23 +17,23 @@ class FeedbacksController extends Controller
 
     public function __construct()
     {
-        $this->layout = $this->current_user_role();
+        $this->layout = $this->currentUserRole();
     }
 
     public function index(): void
     {
         $title = 'Feedbacks registrados';
         $index_folder = $this->layout;
-        
+
         if ($this->layout === 'admin') {
             $openFeedbacks = [];
         } else {
-            $openFeedbacks = $this->current_user()->feedbacks()->get();
+            $openFeedbacks = $this->currentUser()->feedbacks()->get();
         }
 
         $this->render(
-            "feedbacks/$index_folder/index", 
-            data: compact('title','openFeedbacks')
+            "feedbacks/$index_folder/index",
+            data: compact('title', 'openFeedbacks')
         );
     }
 
@@ -52,7 +52,7 @@ class FeedbacksController extends Controller
             $feedbackParams['rating'] = (int) $feedbackParams['rating'];
         }
         $feedbackParams['is_harmfull'] = (int) $feedbackParams['is_harmfull'];
-        $feedbackParams['id_user'] = $this->current_user()->id;
+        $feedbackParams['id_user'] = $this->currentUser()->id;
         $feedback = new Feedback(params: $feedbackParams);
 
         if (!$feedback->save()) {
@@ -61,7 +61,7 @@ class FeedbacksController extends Controller
             throw new \Exception(message: 'Feedback could not be saved.');
         }
         $messageParams = $request->getParam(key: 'message');
-        $messageParams['sender_type'] = $this->current_user_role();
+        $messageParams['sender_type'] = $this->currentUserRole();
         $messageParams['feedback_id'] = $feedback->__get(property: 'id');
         $message = new Message(params: $messageParams);
 
@@ -69,8 +69,7 @@ class FeedbacksController extends Controller
             FlashMessage::danger(value: "Error creating feedback's message!");
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
-        }
-        else {
+        } else {
             FlashMessage::success(value: 'Feedback created successfully!');
             $this->redirectTo(location: Route(name: 'feedbacks'));
         }
@@ -79,10 +78,13 @@ class FeedbacksController extends Controller
     public function destroy(Request $request): void
     {
         $paramId = $request->getParam(key: 'id');
-        
+        $feedback = $this
+                        ->currentUser()
+                        ->feedbacks()
+                        ->findById(id: $paramId);
         if ($paramId) {
             $feedback = $this
-                        ->current_user()
+                        ->currentUser()
                         ->feedbacks()
                         ->findById(id: $paramId);
         } else {
@@ -121,5 +123,4 @@ class FeedbacksController extends Controller
     //         path: "app/views/layouts/$this->layout.phtml"
     //     );
     // }
-
 }

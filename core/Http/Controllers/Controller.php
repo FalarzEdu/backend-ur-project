@@ -9,29 +9,29 @@ use Lib\Authentication\Auth;
 
 class Controller
 {
-    protected $current_user = null;
+    protected ?USer $currentUser = null;
 
     protected string $layout = 'application';
 
     public function __construct()
     {
-        $this->current_user = Auth::user();
+        $this->currentUser = Auth::user();
     }
 
-    // protected ?User $current_user = null;
+    // protected ?User $currentUser = null;
 
     // public function __construct()
     // {
-    //     $this->current_user = Auth::user();
+    //     $this->currentUser = Auth::user();
     // }
 
     // public function currentUser(): ?User
     // {
-    //     if ($this->current_user === null) {
-    //         $this->current_user = Auth::user();
+    //     if ($this->currentUser === null) {
+    //         $this->currentUser = Auth::user();
     //     }
 
-    //     return $this->current_user;
+    //     return $this->currentUser;
     // }
 
     /**
@@ -45,16 +45,16 @@ class Controller
         require Constants::rootPath()->join('app/views/layouts/' . $this->layout . '.phtml');
     }
 
-    public function current_user(): User | Admin
+    public function currentUser(): User | Admin
     {
-        if ($this->current_user === null) {
-            $this->current_user = Auth::user();
+        if ($this->currentUser === null) {
+            $this->currentUser = Auth::user();
         }
 
-        return $this->current_user;
-    } 
+        return $this->currentUser;
+    }
 
-    public function current_user_role(): string 
+    public function currentUserRole(): string
     {
         return Auth::getRole();
     }
