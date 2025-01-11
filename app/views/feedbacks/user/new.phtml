@@ -1,57 +1,188 @@
-<?php
-
-use Core\Router\Route;
-?>
 <form
     action="<?= Route(name: 'user.feedbacks.create') ?>"
     method="POST"
-    class="flex flex-col gap-8 items-start w-1/2 mx-auto min-h-screen text-white">
-    <p class="text-sm">Campos com * são obrigatórios</p>
-    <div>
-        <h3 class="text-xl">Tipo *</h3>
-        <select name="feedback[type]" class="bg-tertiary w-48 h-9 rounded px-2">
-            <option value="Complaint">Reclamação</option>
-            <option value="compliment">elogio</option>
-            <option value="question">Pergunta</option>
-            <option value="suggestion">Sugestão</option>
+    class="flex flex-col gap-6 items-start w-3/4 mx-auto text-black py-4"
+>
+
+<h1 class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold">Modificação de feedback</h1>
+
+    <div class="w-full">
+        <h2 class="rf-md mb-2">Tipo *</h2>
+        <select name="feedback[type]" class="default-input w-full" id="feedback-type-select">
+            <option value="">Selecione</option>
+
+            <option 
+                value="complaint" 
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"complaint"
+                        )
+                    ) 
+                ?>
+            </option>
+
+            <option 
+                value="compliment" 
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"compliment"
+                        )
+                    ) 
+                ?>
+            </option>
+
+            <option 
+                value="question" 
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"question"
+                        )
+                    ) 
+                ?>
+            </option>
+
+            <option 
+                value="suggestion" 
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"Sugestão"
+                        )
+                    ) 
+                ?>
+            </option>
         </select>
     </div>
 
-    <div>
-        <h3 class="text-xl">Avaliação *</h3>
-        <div class=" flex justify-between w-48">
-            <label for="rating-one" class="text-xl">1</label>
-            <input type="radio" name="feedback[rating]" id="rating-one" value="1">
-    
-            <label for="rating-two">2</label>
-            <input type="radio" name="feedback[rating]" id="rating-two" value="2">
-    
-            <label for="rating-three">3</label>
-            <input type="radio" name="feedback[rating]" id="rating-three" value="3">
-    
-            <label for="rating-four">4</label>
-            <input type="radio" name="feedback[rating]" id="rating-four" value="4">
-    
-            <label for="rating-five">5</label>
-            <input type="radio" name="feedback[rating]" id="rating-five" value="5">
+    <div class="w-full flex justify-center flex-col" id="avaliacao-feedback">
+        <h3 class="rf-md mb-2 text-start">Avaliação</h3>
+        <div class=" flex justify-between w-full">
+
+            <label 
+                for="rating-one" 
+                class="text-3xl"
+            >
+                <i 
+                    class="fa-regular fa-star text-yellow-600 rating-star rating-star-1" data-value="1"
+                ></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-one" 
+                value="1"
+                class="hidden"
+            >
+
+            <label 
+                for="rating-two" 
+                class="text-3xl"
+            >
+                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-2" data-value="2"></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-two" 
+                value="2"
+                class="hidden"
+            >
+
+            <label 
+                for="rating-three" 
+                class="text-3xl"
+            >
+                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-3" data-value="3"></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-three" 
+                value="3"
+                class="hidden"
+            >
+
+            <label 
+                for="rating-four" 
+                class="text-3xl"
+            >
+                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-4" data-value="4"></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-four" 
+                value="4"
+                class="hidden"
+            >
+
+            <label 
+                for="rating-five" 
+                class="text-3xl"
+            >
+                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-5" data-value="5"></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-five" 
+                value="5"
+                class="hidden"
+            >
+
         </div>
     </div>
 
-    <div>
-        <h2 class="text-xl">Descrição *</h2>
-        <textarea name="message[content]" id="message_content" class="bg-tertiary rounded p-2"></textarea>
+    <div class="w-full">
+        <h2 class="rf-md mb-2">Descrição *</h2>
+        <textarea 
+            name="message[content]" 
+            id="message_content" 
+            class="default-input w-full min-h-28"    
+            placeholder="Forneça detalhes do motivo deste feedback"
+        ></textarea>
     </div>
 
-    <div>
-        <h2 class="text-xl">Faz mal a saúde *</h2>
-        <label for="is-harmfull-yes" class="text-xl">Sim</label>
-        <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-yes" value="1">
+    <div class="w-full hidden" id="danos-a-saude">
+        <h2 class="rf-md mb-2">Pode causar danos à saúde? *</h2>
+        <div class="flex justify-center gap-8 btn-group">
+            <label 
+                for="is-harmfull-yes" 
+                class="btn-md-outline-primary btn-choice shadow-lg"
+            >
+                Sim
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[is_harmfull]" 
+                id="is-harmfull-yes" 
+                value="1"
+                class="hidden"
+            >
 
-        <label for="is-harmfull-no" class="text-xl">Não</label>
-        <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-no" value="0">
+            <label 
+                for="is-harmfull-no" 
+                class="btn-md-outline-primary btn-choice shadow-lg"
+            >
+                Não
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[is_harmfull]" 
+                id="is-harmfull-no" 
+                value="0"
+                class="hidden"
+            >
+        </div>
     </div>
-    <div class="flex justify-center w-48">
-        <button type="submit" class="bg-primary w-20 h-9 rounded">CRIAR</button>
-    </div>
+
+    <button type="submit" class="btn-md bg-primary w-full">Criar</button>
 
 </form>

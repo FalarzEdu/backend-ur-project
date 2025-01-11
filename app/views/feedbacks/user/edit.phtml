@@ -1,57 +1,191 @@
 <form
-    action="<?= route('user.feedbacks.update', ['id' => $paramId]) ?>" method="POST" class="flex flex-col gap-8 items-start w-1/2 mx-auto min-h-screen text-white">
+    action="<?= route('user.feedbacks.update', ['id' => $paramId]) ?>" method="POST"
+    class="flex flex-col gap-6 items-start w-3/4 mx-auto text-black py-4"
+>
     <input type="hidden" name="_method" value="PUT">
 
-    <div>
-        <h3 class="text-xl">Tipo *</h3>
-        <select name="feedback[type]" class="bg-tertiary w-48 h-9 rounded px-2">
-            <option value="complaint" <?= $feedback->type === 'complaint' ? 'selected' : '' ?>>Complaint</option>
-            <option value="compliment" <?= $feedback->type === 'compliment' ? 'selected' : '' ?>>Compliment</option>
-            <option value="question" <?= $feedback->type === 'question' ? 'selected' : '' ?>>Question</option>
-            <option value="suggestion" <?= $feedback->type === 'suggestion' ? 'selected' : '' ?>>Suggestion</option>
+    <h1 class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold">Modificação de feedback</h1>
+
+    <div class="w-full">
+        <h2 class="rf-md mb-2">Tipo *</h2>
+        <select name="feedback[type]" class="default-input w-full" id="feedback-type-select">
+            <option value="">Selecione</option>
+
+            <option 
+                value="complaint" 
+                <?= $feedback->type === 'complaint' ? 'selected' : '' ?>
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"complaint"
+                        )
+                    ) 
+                ?>
+            </option>
+
+            <option 
+                value="compliment" 
+                <?= $feedback->type === 'compliment' ? 'selected' : '' ?>
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"compliment"
+                        )
+                    ) 
+                ?>
+            </option>
+
+            <option 
+                value="question" 
+                <?= $feedback->type === 'question' ? 'selected' : '' ?>
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"question"
+                        )
+                    ) 
+                ?>
+            </option>
+
+            <option 
+                value="suggestion" 
+                <?= $feedback->type === 'suggestion' ? 'selected' : '' ?>
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:"Sugestão"
+                        )
+                    ) 
+                ?>
+            </option>
         </select>
     </div>
 
-    <div>
-        <h3 class="text-xl">Avaliação *</h3>
-        <div class=" flex justify-between w-48">
-            <label for="rating-one">1</label>
-            <input type="radio" name="feedback[rating]" id="rating-one" value="1"
-                <?= $feedback->rating === 1 ? 'checked' : '' ?>>
+    <div class="w-full flex justify-center flex-col" id="avaliacao-feedback">
+        <h3 class="rf-md mb-2 text-start">Avaliação</h3>
+        <div class=" flex justify-between w-full">
 
-            <label for="rating-two">2</label>
-            <input type="radio" name="feedback[rating]" id="rating-two" value="2"
-                <?= $feedback->rating === 2 ? 'checked' : '' ?>>
+            <label for="rating-one" class="text-3xl">
+                <i 
+                    class="<?= $feedback->rating >= 1 ? 'fa-solid' : 'fa-regular' ?> fa-star text-yellow-600"
+                ></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-one" 
+                value="1"
+                class="hidden"
+                <?= $feedback->rating === 1 ? 'checked' : '' ?>
+            >
 
-            <label for="rating-three">3</label>
-            <input type="radio" name="feedback[rating]" id="rating-three" value="3"
-                <?= $feedback->rating === 3 ? 'checked' : '' ?>>
+            <label for="rating-two" class="text-3xl">
+                <i 
+                    class="<?= $feedback->rating >= 2 ? 'fa-solid' : 'fa-regular' ?> fa-regular fa-star text-yellow-600"
+                ></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-two" 
+                value="2"
+                class="hidden"
+                <?= $feedback->rating === 2 ? 'checked' : '' ?>
+            >
 
-            <label for="rating-four">4</label>
-            <input type="radio" name="feedback[rating]" id="rating-four" value="4"
-                <?= $feedback->rating === 4 ? 'checked' : '' ?>>
+            <label for="rating-three" class="text-3xl">
+                <i 
+                    class="<?= $feedback->rating >= 3 ? 'fa-solid' : 'fa-regular' ?> fa-regular fa-star text-yellow-600"
+                ></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-three" 
+                value="3"
+                class="hidden"
+                <?= $feedback->rating === 3 ? 'checked' : '' ?>
+            >
 
-            <label for="rating-five">5</label>
-            <input type="radio" name="feedback[rating]" id="rating-five" value="5"
-                <?= $feedback->rating === 5 ? 'checked' : '' ?>>
+            <label for="rating-four" class="text-3xl">
+                <i 
+                    class="<?= $feedback->rating >= 4 ? 'fa-solid' : 'fa-regular' ?> fa-regular fa-star text-yellow-600">
+                </i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-four" 
+                value="4"
+                class="hidden"
+                <?= $feedback->rating === 4 ? 'checked' : '' ?>
+            >
+
+            <label for="rating-five" class="text-3xl">
+                <i 
+                    class="<?= $feedback->rating >= 5 ? 'fa-solid' : 'fa-regular' ?> fa-regular fa-star text-yellow-600"
+                ></i>
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[rating]" 
+                id="rating-five" 
+                value="5"
+                class="hidden"
+                <?= $feedback->rating === 5 ? 'checked' : '' ?>
+            >
+
         </div>
     </div>
 
-    <div>
-        <h2 class="text-xl">Descrição *</h2>
-        <textarea name="message[content]" id="message_content" class="bg-tertiary rounded p-2"></textarea>
+    <div class="w-full">
+        <h2 class="rf-md mb-2">Descrição *</h2>
+        <textarea 
+            name="message[content]" 
+            id="message_content" 
+            class="default-input w-full min-h-28"    
+            placeholder="Forneça detalhes do motivo deste feedback"
+        ></textarea>
     </div>
 
-    <div>
-        <h2 class="text-xl">Faz mal a saúde *</h2>
-        <label for="is-harmfull-yes" class="text-xl">Sim</label>
-        <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-yes" value="1"
-            <?= $feedback->is_harmfull === 1 ? 'checked' : '' ?>>
+    <div class="w-full hidden" id="danos-a-saude">
+        <h2 class="rf-md mb-2">Pode causar danos à saúde? *</h2>
+        <div class="flex justify-center gap-8 btn-group">
+            <label 
+                for="is-harmfull-yes" 
+                class="btn-md-outline-primary btn-choice shadow-lg"
+            >
+                Sim
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[is_harmfull]" 
+                id="is-harmfull-yes" 
+                value="1"
+                class="hidden"
+                <?= $feedback->is_harmfull === 1 ? 'checked' : '' ?>
+            >
 
-        <label for="is-harmfull-no" class="text-xl">Não</label>
-        <input type="radio" name="feedback[is_harmfull]" id="is-harmfull-no" value="0"
-            <?= $feedback->is_harmfull === 0 ? 'checked' : '' ?>>
+            <label 
+                for="is-harmfull-no" 
+                class="btn-md-outline-primary btn-choice shadow-lg"
+            >
+                Não
+            </label>
+            <input 
+                type="radio" 
+                name="feedback[is_harmfull]" 
+                id="is-harmfull-no" 
+                value="0"
+                class="hidden"
+                <?= $feedback->is_harmfull === 0 ? 'checked' : '' ?>
+            >
+        </div>
     </div>
 
-    <button type="submit" class="bg-primary w-20 h-9 rounded">Salvar</button>
+    <button type="submit" class="btn-md bg-primary w-full">Salvar</button>
 </form>

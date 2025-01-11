@@ -16,7 +16,7 @@ use DateTime;
  * @property int $status_id
  * @property string $created_on
  * @property string $updated_on
- * @property bool $is_harmfull
+ * @property int $is_harmfull
  */
 class Feedback extends Model
 {

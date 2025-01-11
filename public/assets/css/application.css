@@ -1,19 +1,34 @@
+/* FONTS ################################################## */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* TAILWIND IMPORTS ####################################### */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* FONTS ################################################## */
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-
 @layer components 
-{ .btn-lg 
+{ 
+  .btn-lg 
   {
-    @apply w-64 h-16 rounded-xl bg-white text-2xl font-semibold  shadow-md shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white
+    @apply rf-lg w-64 h-16 rounded-xl bg-white text-2xl font-semibold  shadow-md shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white
   }
   .btn-md
   {
-    @apply w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white text-xl
+    @apply rf-md w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white;
+    font-family: 'Work Sans', sans-serif;
+  }
+  .btn-md-outline-primary
+  {
+    @apply rf-md w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-primary border-[1px] border-solid border-primary/50 bg-white/25 transition-all
+  }
+  .active-btn
+  {
+    @apply bg-primary text-white
+  }
+  .btn-round
+  {
+    @apply rf-2xl w-16 h-16 rounded-full font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white
   }
   .alert-message
   {
@@ -27,17 +42,59 @@
   {
     @apply bg-red-700
   }
+  .info-msg
+  {
+    @apply absolute w-4/5 left-1/10 bottom-4 bg-blue-500
+  }
+  .default-input
+  {
+    @apply bg-transparent border-[1px] border-primary/45 border-solid rounded-md p-2 shadow-md text-black/80 placeholder:rf-sm
+  }
+  .progressive-select
+  {
+    @apply bg-yellow-600
+  }
 }
 
 @layer utilities 
 {
+  /* HEIGHTS */
   .h-1\/10
   {
     @apply h-[10%];
   }
 
+  /* MARGIN, PADDING AND POSITION OFFSET */
   .left-1\/10
   {
     @apply left-[10%]
+  }
+
+  /* FONT CUSTOMIZATION */
+
+   /* Responsive-Font */
+  .rf-sm
+  {
+    @apply text-sm md:text-base 2xl:text-lg
+  }
+
+  .rf-md
+  {
+    @apply text-base md:text-lg 2xl:text-xl
+  }
+
+  .rf-lg
+  {
+    @apply text-lg xl:text-2xl
+  }
+
+  .rf-xl
+  {
+    @apply text-xl xl:text-3xl
+  }
+
+  .rf-2xl
+  {
+    @apply text-2xl xl:text-4xl
   }
 }
