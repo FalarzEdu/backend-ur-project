@@ -15,17 +15,20 @@
 <body class="min-h-svh">
     <?php require '_flash_message.phtml'; ?>
 
-<nav class="flex items-center justify-between h-1/10 bg-primary shadow-lg">
-        <a 
-            href="<?= Route(name: 'admins.home') ?>"
-        >
-            <i 
-                class="fa-solid fa-left-long px-6 text-4xl text-white flex items-center"
-            ></i>
-        </a>
+    <nav class="grid grid-cols-2 h-1/10 bg-primary shadow-lg">
+        <?php if (!is_home_page()): ?>
+            <a 
+            href="javascript:history.back()"
+            class="justify-self-start self-center"
+            >
+                <i 
+                    class="fa-solid fa-left-long px-6 text-4xl text-white"
+                ></i>
+            </a>
+        <?php endif; ?>
 
         <i 
-            class="fa-solid fa-bars px-6 text-4xl text-white flex items-center" 
+            class="fa-solid fa-bars px-6 text-4xl text-white justify-self-end self-center col-start-2" 
             id="open-menu"
         ></i>
 
