@@ -49,7 +49,8 @@ window.addEventListener("load", function()
         mostrar_campos_pertinentes();
 
         const buttons = document.querySelectorAll(".btn-choice");
-        buttons.forEach(element => {
+        buttons.forEach(element => 
+        {
             element.addEventListener("click", function(event: Event) 
             {
                 Interaction.selectButton(event.target as HTMLElement);

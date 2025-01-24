@@ -4,60 +4,24 @@
     class="flex flex-col gap-6 items-start w-3/4 mx-auto text-black py-4"
 >
 
-<h1 class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold">Modificação de feedback</h1>
+<h1 
+    class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold"
+>
+    <?= $title ?>
+</h1>
 
     <div class="w-full">
         <h2 class="rf-md mb-2">Tipo *</h2>
         <select name="feedback[type]" class="default-input w-full" id="feedback-type-select">
             <option value="">Selecione</option>
 
-            <option 
-                value="complaint" 
-            >
-                <?= 
-                    ucfirst(
-                        string: translate(
-                            key: "feedback_types", value:"complaint"
-                        )
-                    ) 
-                ?>
-            </option>
+            <?php foreach($feedbackTypes as $type): ?>
+                <option value="<?= $type ?>" >
+                    <?= ucfirst(string: translate(key: "feedback_types", value:"$type")) 
+                    ?>
+                </option>
+            <?php endforeach; ?>
 
-            <option 
-                value="compliment" 
-            >
-                <?= 
-                    ucfirst(
-                        string: translate(
-                            key: "feedback_types", value:"compliment"
-                        )
-                    ) 
-                ?>
-            </option>
-
-            <option 
-                value="question" 
-            >
-                <?= 
-                    ucfirst(
-                        string: translate(
-                            key: "feedback_types", value:"question"
-                        )
-                    ) 
-                ?>
-            </option>
-
-            <option 
-                value="suggestion" 
-            >
-                <?= 
-                    ucfirst(
-                        string: translate(
-                            key: "feedback_types", value:"Sugestão"
-                        )
-                    ) 
-                ?>
-            </option>
         </select>
     </div>
 
@@ -65,78 +29,21 @@
         <h3 class="rf-md mb-2 text-start">Avaliação</h3>
         <div class=" flex justify-between w-full">
 
-            <label 
-                for="rating-one" 
-                class="text-3xl"
-            >
-                <i 
-                    class="fa-regular fa-star text-yellow-600 rating-star rating-star-1" data-value="1"
-                ></i>
-            </label>
-            <input 
-                type="radio" 
-                name="feedback[rating]" 
-                id="rating-one" 
-                value="1"
-                class="hidden"
-            >
-
-            <label 
-                for="rating-two" 
-                class="text-3xl"
-            >
-                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-2" data-value="2"></i>
-            </label>
-            <input 
-                type="radio" 
-                name="feedback[rating]" 
-                id="rating-two" 
-                value="2"
-                class="hidden"
-            >
-
-            <label 
-                for="rating-three" 
-                class="text-3xl"
-            >
-                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-3" data-value="3"></i>
-            </label>
-            <input 
-                type="radio" 
-                name="feedback[rating]" 
-                id="rating-three" 
-                value="3"
-                class="hidden"
-            >
-
-            <label 
-                for="rating-four" 
-                class="text-3xl"
-            >
-                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-4" data-value="4"></i>
-            </label>
-            <input 
-                type="radio" 
-                name="feedback[rating]" 
-                id="rating-four" 
-                value="4"
-                class="hidden"
-            >
-
-            <label 
-                for="rating-five" 
-                class="text-3xl"
-            >
-                <i class="fa-regular fa-star text-yellow-600 rating-star rating-star-5" data-value="5"></i>
-            </label>
-            <input 
-                type="radio" 
-                name="feedback[rating]" 
-                id="rating-five" 
-                value="5"
-                class="hidden"
-            >
-
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+                <label for="rating-<?= $i ?>" class="text-3xl">
+                    <i 
+                        class="fa-regular fa-star text-yellow-600 rating-star rating-star-<?= $i ?>" data-value="<?= $i ?>"
+                    ></i>
+                </label>
+                <input 
+                    type="radio" 
+                    name="feedback[rating]" 
+                    id="rating-<?= $i ?>" 
+                    value="<?= $i ?>"
+                    class="hidden"
+                >
+            <?php endfor; ?>
+            
         </div>
     </div>
 
@@ -146,7 +53,7 @@
             name="message[content]" 
             id="message_content" 
             class="default-input w-full min-h-28"    
-            placeholder="Forneça detalhes do motivo deste feedback"
+            placeholder="Forneça detalhes desta avaliação"
         ></textarea>
     </div>
 

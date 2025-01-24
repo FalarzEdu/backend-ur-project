@@ -1,11 +1,17 @@
 <div class="flex flex-col items-center w-4/5 mx-auto pt-4">
 
+<h1 
+    class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold mb-6"
+>
+    <?= $title ?>
+</h1>
+
 <?php if (!$openFeedbacks): ?>
 
     <div class="flex flex-col justify-center items-center w-full gap-16 m-auto py-24">
         <i class="fa-regular fa-comments text-secondary text-5xl"></i>
         <h1 class="text-xl text-primary">Parece que não há nada por aqui!</h1>
-        <p class="text- text-center text-secondary">Clique no ícone de "mais" ( + ) abaixo para criar um feedback!</p>
+        <p class="text- text-center text-secondary">Clique no ícone de "mais" ( + ) abaixo para fazer uma avaliação!</p>
     </div>
 
 <?php else: ?>

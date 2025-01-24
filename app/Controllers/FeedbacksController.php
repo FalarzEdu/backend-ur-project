@@ -14,6 +14,7 @@ use App\Helpers\Translation;
 class FeedbacksController extends Controller
 {
     protected string $layout;
+    protected Array $feedbackTypes = ['complaint', 'compliment', 'question', 'suggestion'];
 
     public function __construct()
     {
@@ -22,7 +23,7 @@ class FeedbacksController extends Controller
 
     public function index(): void
     {
-        $title = 'Feedbacks registrados';
+        $title = 'Avaliações registradas';
         $index_folder = $this->layout;
 
         if ($this->layout === 'admin') {
@@ -41,9 +42,13 @@ class FeedbacksController extends Controller
 
     public function new(): void
     {
-        $title = 'Criar um feedback';
+        $title = 'Fazer uma avaliação';
+        $feedbackTypes = $this->feedbackTypes;
 
-        $this->render(view:'feedbacks/user/new', data: compact(var_name: 'title'));
+        $this->render(
+            view:'feedbacks/user/new', 
+            data: compact('title','feedbackTypes')
+        );
     }
 
     public function create(Request $request): void
@@ -87,9 +92,10 @@ class FeedbacksController extends Controller
         $params = $request->getParams();
         $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
         $paramId = $request->getParam(key: 'id');
+        $feedbackTypes = $this->feedbackTypes;
 
-        $title = "Editar feedback #{$paramId}";
-        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback'));
+        $title = "Editar avaliação";
+        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback', 'feedbackTypes'));
     }
 
     public function update(Request $request): void
