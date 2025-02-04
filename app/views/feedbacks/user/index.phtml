@@ -1,11 +1,46 @@
-<div class="flex flex-col items-center w-4/5 mx-auto min-h-screen">
-    <a href="<?= Route(name: 'user.feedbacks.new') ?>" class="btn-md bg-primary text-white px-4 py-2 rounded mb-10 block text-center">NOVO</a>
+<div class="flex flex-col items-center w-4/5 mx-auto pt-4">
+
+<h1 
+    class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold mb-6"
+>
+    <?= $title ?>
+</h1>
+
+<?php if (!$openFeedbacks): ?>
+
+    <div class="flex flex-col justify-center items-center w-full gap-16 m-auto py-24">
+        <i class="fa-regular fa-comments text-secondary text-5xl"></i>
+        <h1 class="text-xl text-primary">Parece que não há nada por aqui!</h1>
+        <p class="text- text-center text-secondary">Clique no ícone de "mais" ( + ) abaixo para fazer uma avaliação!</p>
+    </div>
+
+<?php else: ?>
 
     <?php foreach ($openFeedbacks as $feedback): ?>
-        <div class="flex justify-between items-center bg-tertiary text-white p-4 rounded shadow-md mb-4 w-full max-w-md">
-            <span class="w-3 h-3 bg-white rounded-full mr-3"></span>
-            <h2 class="text-lg font-bold"><?= $feedback->type ?></h2>
-            <div class="flex items-center space-x-4"> <!-- Adicionado flex e space-x para alinhamento e espaçamento -->
+        <div class="flex justify-between items-center bg-tertiary text-secondary p-4 rounded mb-4 w-full shadow-md max-w-md border-b-2 border-primary border-solid">
+
+            <?php switch ($feedback->status_id):
+                case '1': ?>
+                    <i class="fa-solid fa-spinner text-xl"></i>
+                <?php break;
+                case '2': ?>
+                    <i class="fa-solid fa-square-check text-2xl"></i>
+                <?php break;
+            endswitch; ?>
+
+            <h2 
+                class="text-lg font-bold"
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:$feedback->type
+                        )
+                    ) 
+                ?>
+            </h2>
+
+            <div class="flex items-center space-x-4">
                 <a href="<?= route('user.feedbacks.edit', params: ['id' => $feedback->id]) ?>" class="inline-flex items-center p-1">
                     <i class="fa-regular fa-pen-to-square text-lg leading-none"></i>
                 </a>
@@ -20,4 +55,12 @@
             </div>
         </div>
     <?php endforeach; ?>
+<?php endif; ?>
+    <a 
+        href="<?= Route(name: 'user.feedbacks.new') ?>" 
+        class="btn-round bg-primary text-white fixed bottom-8 right-8"
+    >
+        <i class="fa-solid fa-plus"></i>
+    </a>
+
 </div>

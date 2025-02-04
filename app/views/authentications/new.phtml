@@ -4,14 +4,14 @@
     <form 
         action="<?= Route(name: 'authenticate.login') ?>" 
         method="POST"
-        class="w-3/4 flex flex-col justify-center items-center"
+        class="w-3/4 flex flex-col justify-center items-center text-black"
     >
         <div 
             class="visible w-full h-fit rounded-lg text-sm mb-6"
         >
             <label 
                 for="user_email" 
-                class="text-white text-lg pb-4 pl-2"
+                class="rf-lg"
             >
                 Email
             </label>
@@ -19,27 +19,26 @@
                 id="user_email" 
                 type="email" 
                 name="user[email]" 
-                class="w-full h-12 rounded-xl bg-white/40 pl-2 outline-white/30 outline-2 focus:outline text-black text-base placeholder-gray-800 shadow-lg shadow-black/50 font-semibold" 
+                class="default-input w-full min-h-12 my-2" 
                 placeholder="Enter email" 
                 pattern="^[^@]+@[^@]+\.[^@]+$"
             >
-            <small class="invalid-field-text text-white text-sm pl-1 invisible pt-2">Campo inválido!</small>
+            <small class="invalid-field-text rf-sm pl-1 invisible pt-2">Campo inválido!</small>
         </div>
         <div 
             class="visible w-full h-fit rounded-lg text-sm"
         >
-            <label for="user_password" class="text-white text-lg pb-4 pl-2"
-            >
-            Senha
+            <label for="user_password" class="rf-lg">
+                Senha
             </label>
             <input
                 id="user_password"
                 type="password" 
                 name="user[password]" 
-                class="w-full h-12 rounded-xl bg-white/40 pl-2 outline-white/30 outline-2 focus:outline text-black text-base placeholder-gray-800 shadow-lg shadow-black/50 font-semibold"
+                class="default-input w-full min-h-12 my-2" 
                 placeholder="Sua senha"
             >
-            <small class="invalid-field-text text-white text-sm pl-1 invisible pt-2"
+            <small class="invalid-field-text  text-sm pl-1 invisible pt-2"
             >
                 Campo inválido!
             </small>
@@ -47,7 +46,7 @@
         <div class="w-4/5 flex justify-center mt-32">
             <input 
                 type="submit" 
-                class="btn-md bg-primary text-white hover:scale-105 transition-all" 
+                class="btn-md bg-primary  hover:scale-105 transition-all" 
                 value="Entrar"
             >
         </div>

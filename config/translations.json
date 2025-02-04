@@ -1,0 +1,9 @@
+{
+    "feedback_types":
+    {
+        "question": "pergunta",
+        "complaint": "reclamação",
+        "suggestion": "sugestão",
+        "compliment": "elogio"
+    }
+}

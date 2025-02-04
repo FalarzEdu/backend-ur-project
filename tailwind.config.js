@@ -3,7 +3,8 @@ module.exports = {
   content: ["./app/views/**/*.phtml"],
   safelist: [
     'alert-success',
-    'alert-danger'
+    'alert-danger',
+    'active-btn'
   ],
   theme: 
   {
@@ -11,15 +12,13 @@ module.exports = {
     {
       colors:
       {
-        'bg-primary': '#774972',
-        'bg-secondary': '#6a4731',
         'primary': '#774972',
-        'secondary': '#6a4731',
-        'tertiary': '#8E5C3C'
+        'secondary': '#494977',
+        'tertiary': '#DCDCDC'
       },
       fontFamily: 
       {
-        'ws': 'Work Sans'
+        'ws': ['Work Sans', 'sans-serif']
       }
     },
   },

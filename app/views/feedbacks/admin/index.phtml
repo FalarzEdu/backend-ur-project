@@ -1,12 +1,52 @@
-<div>
-    <h1>ADMIN</h1>
-    <?php foreach($openFeedbacks as $feedback): ?>
-        <div>
-            <h2><?= $feedback->type ?></h2>
-            <p><?= $feedback->rating ?></p>
-            <p><?= $feedback->created_on ?></p>
+<div class="flex flex-col items-center w-4/5 mx-auto pt-4">
+
+<?php if (!$openFeedbacks): ?>
+
+    <div class="flex flex-col justify-center items-center w-full gap-16 m-auto py-24">
+        <i class="fa-regular fa-comments text-secondary text-5xl"></i>
+        <h1 class="text-xl text-primary">Parece que não há nada por aqui!</h1>
+    </div>
+
+<?php else: ?>
+
+    <?php foreach ($openFeedbacks as $feedback): ?>
+        <div class="flex justify-between items-center bg-tertiary text-secondary p-4 rounded mb-4 w-full shadow-md max-w-md border-b-2 border-primary border-solid">
+
+            <?php switch ($feedback->status_id):
+                case '1': ?>
+                    <i class="fa-solid fa-spinner text-xl"></i>
+                <?php break;
+                case '2': ?>
+                    <i class="fa-solid fa-square-check text-2xl"></i>
+                <?php break;
+            endswitch; ?>
+
+            <h2 
+                class="text-lg font-bold"
+            >
+                <?= 
+                    ucfirst(
+                        string: translate(
+                            key: "feedback_types", value:$feedback->type
+                        )
+                    ) 
+                ?>
+            </h2>
+
+            <div class="flex items-center space-x-4">
+                <a href="<?= route('user.feedbacks.edit', params: ['id' => $feedback->id]) ?>" class="inline-flex items-center p-1">
+                    <i class="fa-regular fa-pen-to-square text-lg leading-none"></i>
+                </a>
+                <form
+                    action="<?= Route(name: 'user.feedbacks.delete', params: ['id' => $feedback->id]) ?>"
+                    method="POST" class="flex items-center mb-0 q">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="px-4 py-2 rounded text-red-500 inline-flex items-center">
+                        <i class="fa-regular fa-trash-can text-lg leading-none"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     <?php endforeach; ?>
+<?php endif; ?>
 </div>
-
-<a href="<?= Route(name: 'user.feedbacks.new') ?>" class="btn-md bg-primary">NOVO</a>

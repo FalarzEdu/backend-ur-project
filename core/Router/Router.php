@@ -10,8 +10,12 @@ use Exception;
 class Router
 {
     private static Router|null $instance = null;
-    /** @var Route[] $routes */
+    /**
+     * @var Route[] $routes
+     * @var Route $actual_route
+     */
     private array $routes = [];
+    private Route | null $actual_route = null;
 
     private function __construct()
     {
@@ -44,6 +48,11 @@ class Router
     public function getRoute(int $index): Route
     {
         return $this->routes[$index];
+    }
+
+    public function getActualRoute(): Route | null
+    {
+        return $this->actual_route;
     }
 
     /**
@@ -104,6 +113,8 @@ class Router
         foreach ($this->routes as $route) {
             if ($route->match($request)) {
                 $route->runMiddlewares($request);
+
+                $this->actual_route = $route;
 
                 $class = $route->getControllerName();
                 $action = $route->getActionName();

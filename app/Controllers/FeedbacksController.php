@@ -5,15 +5,15 @@ namespace App\Controllers;
 use App\Models\Feedback;
 use App\Models\Message;
 use Core\Http\Controllers\Controller;
-use Core\Constants\Constants;
-use Core\Debug\Debugger;
 use Core\Http\Request;
-use Core\Router\Route;
 use Lib\FlashMessage;
+use App\Helpers\Translation;
 
 class FeedbacksController extends Controller
 {
     protected string $layout;
+    /** @var array<string> $feedbackTypes */
+    protected array $feedbackTypes = ['complaint', 'compliment', 'question', 'suggestion'];
 
     public function __construct()
     {
@@ -22,7 +22,7 @@ class FeedbacksController extends Controller
 
     public function index(): void
     {
-        $title = 'Feedbacks registrados';
+        $title = 'Avaliações registradas';
         $index_folder = $this->layout;
 
         if ($this->layout === 'admin') {
@@ -32,16 +32,23 @@ class FeedbacksController extends Controller
         }
 
         $this->render(
-            "feedbacks/$index_folder/index",
-            data: compact('title', 'openFeedbacks')
+            view: "feedbacks/$index_folder/index",
+            data: compact(
+                'title',
+                'openFeedbacks'
+            )
         );
     }
 
     public function new(): void
     {
-        $title = 'Criar um feedback';
+        $title = 'Fazer uma avaliação';
+        $feedbackTypes = $this->feedbackTypes;
 
-        $this->render(view:'feedbacks/user/new', data: compact(var_name: 'title'));
+        $this->render(
+            view:'feedbacks/user/new',
+            data: compact('title', 'feedbackTypes')
+        );
     }
 
     public function create(Request $request): void
@@ -51,7 +58,12 @@ class FeedbacksController extends Controller
         if (!empty($feedbackParams['rating'])) {
             $feedbackParams['rating'] = (int) $feedbackParams['rating'];
         }
-        $feedbackParams['is_harmfull'] = (int) $feedbackParams['is_harmfull'];
+        if (!empty($feedbackParams['is_harmfull'])) {
+            $feedbackParams['is_harmfull'] = (int) $feedbackParams['is_harmfull'];
+        } else {
+            $feedbackParams['is_harmfull'] = 0;
+        }
+
         $feedbackParams['id_user'] = $this->currentUser()->id;
         $feedback = new Feedback(params: $feedbackParams);
 
@@ -80,9 +92,10 @@ class FeedbacksController extends Controller
         $params = $request->getParams();
         $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
         $paramId = $request->getParam(key: 'id');
+        $feedbackTypes = $this->feedbackTypes;
 
-        $title = "Editar feedback #{$paramId}";
-        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback'));
+        $title = "Editar avaliação";
+        $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback', 'feedbackTypes'));
     }
 
     public function update(Request $request): void
