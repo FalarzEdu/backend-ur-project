@@ -5,16 +5,15 @@ namespace App\Controllers;
 use App\Models\Feedback;
 use App\Models\Message;
 use Core\Http\Controllers\Controller;
-use Core\Constants\Constants;
 use Core\Http\Request;
-use Core\Router\Route;
 use Lib\FlashMessage;
 use App\Helpers\Translation;
 
 class FeedbacksController extends Controller
 {
     protected string $layout;
-    protected Array $feedbackTypes = ['complaint', 'compliment', 'question', 'suggestion'];
+    /** @var array<string> $feedbackTypes */
+    protected array $feedbackTypes = ['complaint', 'compliment', 'question', 'suggestion'];
 
     public function __construct()
     {
@@ -35,7 +34,8 @@ class FeedbacksController extends Controller
         $this->render(
             view: "feedbacks/$index_folder/index",
             data: compact(
-                'title', 'openFeedbacks'
+                'title',
+                'openFeedbacks'
             )
         );
     }
@@ -46,8 +46,8 @@ class FeedbacksController extends Controller
         $feedbackTypes = $this->feedbackTypes;
 
         $this->render(
-            view:'feedbacks/user/new', 
-            data: compact('title','feedbackTypes')
+            view:'feedbacks/user/new',
+            data: compact('title', 'feedbackTypes')
         );
     }
 

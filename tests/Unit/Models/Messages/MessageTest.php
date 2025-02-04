@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Models\Messages;
+
 use App\Models\Feedback;
 use App\Models\Message;
 use App\Models\User;
@@ -7,9 +9,9 @@ use Tests\TestCase;
 
 class MessageTest extends TestCase
 {
-    private $user;
-    private $feedback;
-    private $message;
+    private User $user;
+    private Feedback $feedback;
+    private Message $message;
 
     public function setUp(): void
     {
@@ -69,9 +71,10 @@ class MessageTest extends TestCase
         $message2->save();
 
         $this->assertEquals(
-            expected: 'Feedback mock content', actual: $message2->content
+            expected: 'Feedback mock content',
+            actual: $message2->__get('content')
         );
-        
+
         $this->assertTrue(
             condition: $message2->update(
                 data: ['content' => 'New mock content']
@@ -81,7 +84,8 @@ class MessageTest extends TestCase
         $message2 = Message::findById(id: $message2->id);
 
         $this->assertEquals(
-            expected: 'New mock content', actual: $message2->content
+            expected: 'New mock content',
+            actual: $message2->content
         );
     }
 
@@ -109,12 +113,14 @@ class MessageTest extends TestCase
         $this->assertFalse(condition: $message2->save());
         $this->assertNotEmpty(actual: $message2->allErrors());
         $this->assertEquals(
-            expected: 'não pode ser vazio!', actual: $message2->errors(
+            expected: 'não pode ser vazio!',
+            actual: $message2->errors(
                 index: 'feedback_id'
             )
         );
         $this->assertEquals(
-            expected: 'não pode ser vazio!', actual: $message2->errors(
+            expected: 'não pode ser vazio!',
+            actual: $message2->errors(
                 index: 'sender_type'
             )
         );

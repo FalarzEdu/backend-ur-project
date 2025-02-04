@@ -15,7 +15,7 @@ class Router
      * @var Route $actual_route
      */
     private array $routes = [];
-    private Route | null $actual_route = null; 
+    private Route | null $actual_route = null;
 
     private function __construct()
     {

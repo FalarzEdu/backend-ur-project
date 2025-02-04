@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Models\Feedbacks;
+
 use App\Models\Feedback;
 use App\Models\User;
 use Core\Debug\Debugger;
@@ -7,8 +9,8 @@ use Tests\TestCase;
 
 class FeedbackTest extends TestCase
 {
-    private $user;
-    private $feedback;
+    private User $user;
+    private Feedback $feedback;
 
     public function setUp(): void
     {
@@ -65,7 +67,8 @@ class FeedbackTest extends TestCase
         $feedback2->save();
 
         $this->assertEquals(
-            expected: 3, actual: $feedback2->rating
+            expected: 3,
+            actual: $feedback2->__get('rating')
         );
 
         $feedback2->update(
@@ -81,10 +84,12 @@ class FeedbackTest extends TestCase
         $feedback2 = Feedback::findById(id: $feedback2->id);
 
         $this->assertEquals(
-            expected: 5, actual: $feedback2->rating
+            expected: 5,
+            actual: $feedback2->rating
         );
         $this->assertEquals(
-            expected: 'question', actual: $feedback2->type
+            expected: 'question',
+            actual: $feedback2->type
         );
     }
 
@@ -115,7 +120,8 @@ class FeedbackTest extends TestCase
         $this->assertFalse(condition: $feedback2->save());
         $this->assertNotEmpty(actual: $feedback2->allErrors());
         $this->assertEquals(
-            expected: 'não pode ser vazio!', actual: $feedback2->errors(
+            expected: 'não pode ser vazio!',
+            actual: $feedback2->errors(
                 index: 'type'
             )
         );
