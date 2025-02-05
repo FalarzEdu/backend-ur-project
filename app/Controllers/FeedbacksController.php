@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Feedback;
 use App\Models\Message;
+use App\Models\Image;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\FlashMessage;
@@ -81,9 +82,21 @@ class FeedbacksController extends Controller
             FlashMessage::danger(value: "Error creating feedback's message!");
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
-        } else {
-            FlashMessage::success(value: 'Feedback created successfully!');
-            $this->redirectTo(location: Route(name: 'feedbacks'));
+        }
+        if(!empty($_FILES)) {
+            $imageParams['feedback_id'] = $feedback->__get(property: 'id');
+            $imageParams['path'] = $_FILES['image']['name']['content'];
+
+            $image = new Image(params: $imageParams);
+
+            if(!$image->save()) {
+                FlashMessage::danger(value: "Error creating feedback's image!");
+                $this->redirectTo(location: Route(name: 'feedbacks'));
+                throw new \Exception(message: 'Feedback could not be saved.');
+            } else {
+                FlashMessage::success(value: 'Feedback created successfully!');
+                $this->redirectTo(location: Route(name: 'feedbacks'));
+            }
         }
     }
 
