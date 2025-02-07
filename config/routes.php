@@ -3,6 +3,7 @@
 use App\Controllers\AuthController;
 use App\Controllers\UserController;
 use App\Controllers\AdminController;
+use App\Controllers\BuffetReservationsController;
 use App\Controllers\FeedbacksController;
 use Core\Router\Route;
 
@@ -16,9 +17,11 @@ Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
     /* GET */
     Route::get(uri: '/home', action: [UserController::class, 'index'])->name(name: 'users.home');
     Route::get(uri: '/feedbacks/create', action: [FeedbacksController::class, 'new'])->name(name: 'user.feedbacks.new');
+    Route::get(uri: '/reservations', action: [BuffetReservationsController::class, 'index'])->name('user.reservations');
 
     /* POST */
     Route::post(uri: '/feedbacks/user/create', action: [FeedbacksController::class, 'create'])->name(name: 'user.feedbacks.create');
+    Route::post(uri: '/reservation/confirm', action: [BuffetReservationsController::class, 'confirmReserve'])->name(name: 'user.reservation.create');
 
     /* UPDATE */
     Route::get(uri: '/feedbacks/{id}/edit', action: [FeedbacksController::class, 'edit'])->name(name: 'user.feedbacks.edit');
@@ -26,6 +29,7 @@ Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
 
     /* DELETE */
     Route::delete(uri: '/feedbacks/delete/{id}', action: [FeedbacksController::class, 'destroy'])->name('user.feedbacks.delete');
+    Route::delete(uri: '/reservation/disconfirm', action: [BuffetReservationsController::class, 'disconfirmReserve'])->name(name: 'user.reservation.destroy');
 });
 
 /* Admin protected routes ################################ */

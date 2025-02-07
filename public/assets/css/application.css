@@ -11,16 +11,24 @@
 { 
   .btn-lg 
   {
-    @apply rf-lg w-64 h-16 rounded-xl bg-white text-2xl font-semibold  shadow-md shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white
+    @apply rf-lg w-64 h-16 rounded-xl bg-white text-2xl font-semibold  shadow-md shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white px-4 hover:scale-105 transition-all
   }
   .btn-md
   {
-    @apply rf-md w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white;
+    @apply rf-md w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-white px-4;
     font-family: 'Work Sans', sans-serif;
   }
   .btn-md-outline-primary
   {
     @apply rf-md w-48 h-12 rounded-md font-semibold shadow-lg shadow-black/50 hover:cursor-pointer font-ws flex justify-center items-center text-primary border-[1px] border-solid border-primary/50 bg-white/25 transition-all
+  }
+  .btn-lg-outline-success
+  {
+    @apply btn-lg text-green-600 border-[1px] border-solid border-green-600 transition-all
+  }
+  .btn-lg-outline-danger
+  {
+    @apply btn-lg text-red-600 border-[1px] border-solid border-red-600 transition-all
   }
   .active-btn
   {

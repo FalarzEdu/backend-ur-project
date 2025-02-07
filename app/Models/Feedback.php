@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Core\Database\ActiveRecord\BelongsTo;
-use Core\Database\ActiveRecord\BelongsToMany;
 use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
 use Core\Database\ActiveRecord\Model;
