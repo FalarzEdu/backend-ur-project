@@ -25,8 +25,7 @@ class BuffetReservationsController extends Controller
     }
     public function confirmReserve(Request $request): void
     {
-        try
-        {
+        try {
             if (!$request->getParam(key: 'mealId')) {
                 throw new Exception(message: 'Meal ID can not be empty!');
             }
@@ -41,8 +40,8 @@ class BuffetReservationsController extends Controller
             }
 
             $reservation = new BuffetReservation(params: [
-                'user_id' => $userId, 
-                'meal_id' => $mealId, 
+                'user_id' => $userId,
+                'meal_id' => $mealId,
                 'has_assistance' => 0
             ]);
 
@@ -51,9 +50,7 @@ class BuffetReservationsController extends Controller
             $this->redirectBack();
 
             return;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             error_log(
                 message: "Error making a buffet reservation: " . $e->getMessage()
             );
@@ -65,8 +62,7 @@ class BuffetReservationsController extends Controller
 
     public function disconfirmReserve(Request $request): void
     {
-        try
-        {
+        try {
             if (!$request->getParam(key: 'mealId')) {
                 throw new Exception(message: 'Meal ID can not be empty!');
             }
@@ -83,9 +79,7 @@ class BuffetReservationsController extends Controller
             FlashMessage::danger(value: 'Você já desconfirmou sua presença nesta refeição!');
             $this->redirectBack();
             return;
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             error_log(
                 message: "Error making a buffet reservation: " . $e->getMessage()
             );
@@ -102,10 +96,12 @@ class BuffetReservationsController extends Controller
      */
     private function verifyReservation($mealId): bool | array
     {
-        if ($reservation = BuffetReservation::where(conditions: [
+        if (
+            $reservation = BuffetReservation::where(conditions: [
             'user_id' => $this->currentUser()->id,
             'meal_id' => $mealId
-        ])) {
+            ])
+        ) {
             return $reservation;
         }
 

@@ -37,8 +37,8 @@ class Meal extends Model
     public function users(): BelongsToMany
     {
         return $this->BelongsToMany(
-            related: User::class, 
-            pivot_table: 'buffet_reservations', 
+            related: User::class,
+            pivot_table: 'buffet_reservations',
             from_foreign_key: 'meal_id',
             to_foreign_key: 'user_id'
         );
