@@ -21,7 +21,14 @@ class BuffetReservationsController extends Controller
         $lunchReservation = $this->verifyReservation(mealId: $mealIds['lunchId']);
         $dinnerReservation = $this->verifyReservation(mealId: $mealIds['dinnerId']);
 
-        $this->render(view: 'reservations/index', data: compact('title', 'mealIds', 'lunchReservation', 'dinnerReservation'));
+        $data = compact(
+            'title',
+            'mealIds',
+            'lunchReservation',
+            'dinnerReservation'
+        );
+
+        $this->render(view: 'reservations/index', data: $data);
     }
     public function confirmReserve(Request $request): void
     {
