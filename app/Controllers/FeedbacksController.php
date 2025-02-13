@@ -83,9 +83,13 @@ class FeedbacksController extends Controller
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
         }
+        
         if(!empty($_FILES)) {
-            $imageParams['feedback_id'] = $feedback->__get(property: 'id');
-            $imageParams['path'] = $_FILES['image']['name']['content'];
+            $image = $_FILES['image'];
+            $imageParams = [
+                'feedback_id'=> $feedback->__get(property: 'id'),
+                'path' => $image['name']
+            ];
 
             $image = new Image(params: $imageParams);
 
@@ -95,6 +99,8 @@ class FeedbacksController extends Controller
                 throw new \Exception(message: 'Feedback could not be saved.');
             } else {
                 FlashMessage::success(value: 'Feedback created successfully!');
+                $directory = "/var/www/public/assets/images/feedback/".$image->feedback_id;;
+                mkdir($directory, recursive: true);
                 $this->redirectTo(location: Route(name: 'feedbacks'));
             }
         }
