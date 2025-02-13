@@ -91,16 +91,18 @@ class FeedbacksController extends Controller
                 'path' => $image['name']
             ];
 
-            $image = new Image(params: $imageParams);
+            $imageModel = new Image(params: $imageParams);
 
-            if(!$image->save()) {
+            if(!$imageModel->save()) {
                 FlashMessage::danger(value: "Error creating feedback's image!");
                 $this->redirectTo(location: Route(name: 'feedbacks'));
                 throw new \Exception(message: 'Feedback could not be saved.');
             } else {
                 FlashMessage::success(value: 'Feedback created successfully!');
-                $directory = "/var/www/public/assets/images/feedback/".$image->feedback_id;;
+                $directory = "/var/www/public/assets/images/uploads/feedback/".$imageModel->feedback_id;;
                 mkdir($directory, recursive: true);
+                $path = $directory . "/" . basename($image['name']);
+                move_uploaded_file($image['tmp_name'], $path);
                 $this->redirectTo(location: Route(name: 'feedbacks'));
             }
         }
