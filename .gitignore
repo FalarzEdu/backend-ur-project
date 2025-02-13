@@ -29,3 +29,6 @@ vendor/
 
 # Yarn dependencies
 node_modules/
+
+# images feedbacks
+public/assets/images/uploads/
