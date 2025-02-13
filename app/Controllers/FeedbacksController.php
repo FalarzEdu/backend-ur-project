@@ -47,7 +47,7 @@ class FeedbacksController extends Controller
         $feedbackTypes = $this->feedbackTypes;
 
         $this->render(
-            view:'feedbacks/user/new',
+            view: 'feedbacks/user/new',
             data: compact('title', 'feedbackTypes')
         );
     }
@@ -83,27 +83,47 @@ class FeedbacksController extends Controller
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
         }
-        
-        if(!empty($_FILES)) {
-            $image = $_FILES['image'];
-            $imageParams = [
-                'feedback_id'=> $feedback->__get(property: 'id'),
-                'path' => $image['name']
-            ];
+        if (!empty($_FILES)) {
+            $imageArray = $_FILES['image'];
 
-            $imageModel = new Image(params: $imageParams);
+            if (!is_array($imageArray['name'])) {
+                $imageArray = [
+                    'name' => [$imageArray['name']],
+                    'type' => [$imageArray['type']],
+                    'tmp_name' => [$imageArray['tmp_name']],
+                    'error' => [$imageArray['error']],
+                    'size' => [$imageArray['size']]
+                ];
+            }
 
-            if(!$imageModel->save()) {
-                FlashMessage::danger(value: "Error creating feedback's image!");
-                $this->redirectTo(location: Route(name: 'feedbacks'));
-                throw new \Exception(message: 'Feedback could not be saved.');
-            } else {
-                FlashMessage::success(value: 'Feedback created successfully!');
-                $directory = "/var/www/public/assets/images/uploads/feedback/".$imageModel->feedback_id;;
+            $directory = "/var/www/public/assets/images/uploads/feedback/" . $feedback->__get('id');
+
+            if (!is_dir($directory)) {
                 mkdir($directory, recursive: true);
-                $path = $directory . "/" . basename($image['name']);
-                move_uploaded_file($image['tmp_name'], $path);
-                $this->redirectTo(location: Route(name: 'feedbacks'));
+            }
+
+            foreach ($imageArray['name'] as $p => $img) {
+                // Gerar um nome único para evitar sobrescrita
+                $uniqueName = uniqid() . "_" . basename($img);
+                $path = $directory . "/" . $uniqueName;
+
+                // Mover arquivo e salvar no banco
+                if (move_uploaded_file($imageArray['tmp_name'][$p], $path)) {
+                    $imageParams = [
+                        'feedback_id' => $feedback->__get('id'),
+                        'path' => $uniqueName // Armazena apenas o nome do arquivo, não o caminho completo
+                    ];
+                    $imageModel = new Image(params: $imageParams);
+
+                    if (!$imageModel->save()) {
+                        FlashMessage::danger(value: "Error creating feedback's image!");
+                        $this->redirectTo(location: Route(name: 'feedbacks'));
+                        throw new \Exception(message: 'Feedback could not be saved.');
+                    }
+                } else {
+                    FlashMessage::success(value: 'Feedback created successfully!');
+                    $this->redirectTo(location: Route(name: 'feedbacks'));
+                }
             }
         }
     }
@@ -142,7 +162,7 @@ class FeedbacksController extends Controller
         $feedback->destroy();
 
         if (!$feedback::findById($paramId)) {
-            FlashMessage::success(value:'Registro deletado com sucesso.');
+            FlashMessage::success(value: 'Registro deletado com sucesso.');
             $this->redirectTo(location: Route(name: 'feedbacks'));
         }
     }
