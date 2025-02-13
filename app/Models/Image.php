@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\Model;
 use DateTime;
 use Lib\Validations;
@@ -29,6 +30,13 @@ class Image extends Model
     {
         $this->feedback_id = $params['feedback_id'];
         parent::__construct(params: $params);
+    }
+
+    public function feedback(): BelongsTo {
+        return $this->belongsTo(
+            related: User::class,
+            foreignKey: 'id_feedback'
+        );
     }
 
     public function validates(): void
