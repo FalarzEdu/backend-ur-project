@@ -103,28 +103,29 @@ class FeedbacksController extends Controller
             }
 
             foreach ($imageArray['name'] as $p => $img) {
-                // Gerar um nome único para evitar sobrescrita
                 $uniqueName = uniqid() . "_" . basename($img);
                 $path = $directory . "/" . $uniqueName;
-
-                // Mover arquivo e salvar no banco
+            
                 if (move_uploaded_file($imageArray['tmp_name'][$p], $path)) {
                     $imageParams = [
                         'feedback_id' => $feedback->__get('id'),
-                        'path' => $uniqueName // Armazena apenas o nome do arquivo, não o caminho completo
+                        'path' => $uniqueName
                     ];
                     $imageModel = new Image(params: $imageParams);
-
+            
                     if (!$imageModel->save()) {
-                        FlashMessage::danger(value: "Error creating feedback's image!");
-                        $this->redirectTo(location: Route(name: 'feedbacks'));
-                        throw new \Exception(message: 'Feedback could not be saved.');
+                        FlashMessage::danger("Erro ao salvar imagem no banco!");
+                        return;
                     }
                 } else {
-                    FlashMessage::success(value: 'Feedback created successfully!');
-                    $this->redirectTo(location: Route(name: 'feedbacks'));
+                    FlashMessage::danger("Erro ao mover imagem para o diretório!");
+                    return;
                 }
             }
+            
+            // Redirecionamento acontece APENAS após o loop
+            FlashMessage::success('Feedback created successfully!');
+            $this->redirectTo(Route(name: 'feedbacks'));
         }
     }
 
