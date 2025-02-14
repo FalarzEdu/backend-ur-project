@@ -83,7 +83,8 @@ class FeedbacksController extends Controller
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
         }
-        if (!empty($_FILES)) {
+
+        if (!empty($_FILES['image'] && $_FILES['image']['error'][0] !== UPLOAD_ERR_NO_FILE)) {
             $imageArray = $_FILES['image'];
 
             if (!is_array($imageArray['name'])) {
@@ -123,10 +124,12 @@ class FeedbacksController extends Controller
                 }
             }
             
-            // Redirecionamento acontece APENAS após o loop
             FlashMessage::success('Feedback created successfully!');
             $this->redirectTo(Route(name: 'feedbacks'));
         }
+
+        FlashMessage::success('Feedback created successfully!');
+            $this->redirectTo(Route(name: 'feedbacks'));
     }
 
     public function edit(Request $request): void
