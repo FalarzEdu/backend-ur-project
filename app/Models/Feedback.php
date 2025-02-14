@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Core\Database\ActiveRecord\BelongsTo;
-use Core\Database\ActiveRecord\BelongsToMany;
 use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
 use Core\Database\ActiveRecord\Model;
@@ -41,10 +40,18 @@ class Feedback extends Model
             foreignKey: 'id_user'
         );
     }
+
     public function messages(): HasMany
     {
         return $this->hasMany(
             related: Message::class,
+            foreignKey: 'feedback_id'
+        );
+    }
+
+    public function image(): HasMany {
+        return $this->hasMany(
+            related: Image::class,
             foreignKey: 'feedback_id'
         );
     }
