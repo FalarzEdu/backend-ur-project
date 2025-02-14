@@ -67,16 +67,6 @@ class Feedback extends Model
         'is_harmfull'
     ];
 
-    // public function problems(): HasMany
-    // {
-    //     return $this->hasMany(Problem::class, 'user_id');
-    // }
-
-    // public function reinforcedProblems(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Problem::class, 'problem_user_reinforce', 'user_id', 'problem_id');
-    // }
-
     public function validates(): void
     {
         Validations::notEmpty(attribute: 'type', obj: $this);
