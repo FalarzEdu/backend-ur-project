@@ -1,0 +1,38 @@
+<html lang="pt-br"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RU</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/application.css">
+</head>
+
+<body class="min-h-svh">
+    <div class="w-full h-full flex items-center justify-center">
+    <form action="/login" method="POST" class="w-3/4 flex flex-col justify-center items-center text-black">
+        <div class="visible w-full h-fit rounded-lg text-sm mb-6">
+            <label for="user_email" class="rf-lg">
+                Email
+            </label>
+            <input id="user_email" type="email" name="user[email]" class="default-input w-full min-h-12 my-2" placeholder="Enter email" pattern="^[^@]+@[^@]+\.[^@]+$">
+            <small class="invalid-field-text rf-sm pl-1 invisible pt-2">Campo inválido!</small>
+        </div>
+        <div class="visible w-full h-fit rounded-lg text-sm">
+            <label for="user_password" class="rf-lg">
+                Senha
+            </label>
+            <input id="user_password" type="password" name="user[password]" class="default-input w-full min-h-12 my-2" placeholder="Sua senha">
+            <small class="invalid-field-text  text-sm pl-1 invisible pt-2">
+                Campo inválido!
+            </small>
+        </div>
+        <div class="w-4/5 flex justify-center mt-32">
+            <input type="submit" class="btn-md bg-primary  hover:scale-105 transition-all" value="Entrar">
+        </div>
+    </form>
+</div>    
+    
+
+<script src="/assets/js/Controllers/login.js" type="module"></script>
+
+</body></html>
