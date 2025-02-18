@@ -8,6 +8,9 @@ parameters:
 
   excludePaths:
     - app/views/*
+    - tests/Acceptance/_output/*
+    - tests/Support/_generated/*
+    - tests/Support/Data/*
 
   ignoreErrors:
     - '#Unsafe usage of new static\(\)\.#'

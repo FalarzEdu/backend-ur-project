@@ -42,6 +42,12 @@ $ cp .env.example .env
 $ ./run composer install
 ```
 
+#### Construa os arquivos do codeception
+
+```
+$ ./run codecept build
+```
+
 #### Rode os contêineres
 
 ```
@@ -66,7 +72,7 @@ $ ./run db:reset
 $ ./run db:populate
 ```
 
-#### Rode os testes
+#### Rode os testes unitários
 
 ```
 $ docker compose run --rm php ./vendor/bin/phpunit tests --color
@@ -77,6 +83,11 @@ ou
 ```
 $ ./run test
 ```
+
+#### Rode os testes de browser
+
+```
+$ ./run test:browser
 
 #### Rode os Linters
 
