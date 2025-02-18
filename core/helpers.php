@@ -4,7 +4,7 @@ use App\Helpers\Translation;
 use Core\Debug\Debugger;
 use Core\Router\Router;
 
-if (!function_exists('d')) {
+if (!function_exists('dd')) {
     function dd(): void
     {
         Debugger::dd(...func_get_args());
