@@ -1,7 +1,11 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Tests\Support\Helper;
+
 use Codeception\Module;
+
 class LoginHelper extends Module
 {
     public function login(string $username, string $password): void
