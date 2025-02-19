@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Feedback;
 use App\Models\FeedbackImage;
 use App\Models\Message;
+use Core\Constants\Constants;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\FlashMessage;
@@ -116,16 +117,17 @@ class FeedbacksController extends Controller
         $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
 
         // $feedbackTypes = $this->feedbackTypes;
-        $images = Feedback::where(conditions: ['id' => 35])[0]
-                ->images()
-                ->get();
-
-        dd($images);
+        $images = Feedback::where(conditions: ['id' => $feedbackId])[0]
+                    ->images()
+                    ->get();
 
         $title = "Visualização";
         $this->render(
             view: 'feedbacks/user/preview', 
-            data: compact('title', 'paramId', 'feedback')
+            data: compact(
+                'title', 
+                'feedback', 'images'
+            )
         );
     }
 

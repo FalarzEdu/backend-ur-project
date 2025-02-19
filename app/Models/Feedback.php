@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Core\Constants\Constants;
 use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
 use Core\Database\ActiveRecord\Model;
 use DateTime;
-use PHPUnit\TextUI\Configuration\Constant;
 
 /**
  * @property string $type
@@ -54,7 +52,7 @@ class Feedback extends Model
     public function images(): HasMany
     {
         return $this->hasMany(
-            related: Image::class,
+            related: FeedbackImage::class,
             foreignKey: 'feedback_id'
         );
     }

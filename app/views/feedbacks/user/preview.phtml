@@ -4,6 +4,8 @@
         <?= $title ?>
     </h1>
 
+    <?php foreach ($images as $image): ?>
+        <img src="/assets/uploads/<?= $image->path ?>" alt="aa">
+    <?php endforeach; ?>
 
-    <img src="/public/assets/uploads/165/banana67b4f800dc103_lado.jpg">
 </div>
