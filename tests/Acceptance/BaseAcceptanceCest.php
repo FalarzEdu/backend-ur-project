@@ -14,8 +14,8 @@ class BaseAcceptanceCest
         Database::create();
         Database::migrate();
     }
-    public function _after(AcceptanceTester $page): void
-    {
-        Database::drop();
-    }
+    // public function _after(AcceptanceTester $page): void
+    // {
+    //     Database::drop();
+    // }
 }
