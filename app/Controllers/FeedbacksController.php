@@ -84,7 +84,10 @@ class FeedbacksController extends Controller
             throw new \Exception(message: 'Feedback could not be saved.');
         }
 
-        if (!empty($_FILES['image'] && $_FILES['image']['error'][0] !== UPLOAD_ERR_NO_FILE)) {
+        $feedbackIns = new Feedback();
+        $feedbackIns->addImage($_FILES['image']);
+
+        /*if (!empty($_FILES['image'] && $_FILES['image']['error'][0] !== UPLOAD_ERR_NO_FILE)) {
             $imageArray = $_FILES['image'];
 
             if (!is_array($imageArray['name'])) {
@@ -97,7 +100,7 @@ class FeedbacksController extends Controller
                 ];
             }
 
-            $directory = "/var/www/public/assets/images/uploads/feedback/" . $feedback->__get('id');
+            $directory = "/var/www/public/assets/uploads/" . $feedback->__get('id');
 
             if (!is_dir($directory)) {
                 mkdir($directory, recursive: true);
@@ -129,7 +132,7 @@ class FeedbacksController extends Controller
         }
 
         FlashMessage::success('Feedback created successfully!');
-            $this->redirectTo(Route(name: 'feedbacks'));
+            $this->redirectTo(Route(name: 'feedbacks'));*/
     }
 
     public function edit(Request $request): void
@@ -141,6 +144,17 @@ class FeedbacksController extends Controller
 
         $title = "Editar avaliação";
         $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback', 'feedbackTypes'));
+    }
+
+    public function preview(Request $request):void
+    {
+        $params = $request->getParams();
+        $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
+        $paramId = $request->getParam(key: 'id');
+        $feedbackTypes = $this->feedbackTypes;
+
+        $title = "Visualização";
+        $this->render(view: 'feedbacks/user/preview', data: compact('title', 'paramId', 'feedback'));
     }
 
     public function update(Request $request): void

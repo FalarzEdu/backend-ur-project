@@ -16,6 +16,7 @@ Route::middleware(middleware: 'auth:user')->group(callback: function (): void {
     /* GET */
     Route::get(uri: '/home', action: [UserController::class, 'index'])->name(name: 'users.home');
     Route::get(uri: '/feedbacks/create', action: [FeedbacksController::class, 'new'])->name(name: 'user.feedbacks.new');
+    Route::get(uri: '/feedbacks/{id}/preview', action: [FeedbacksController::class, 'preview'])->name(name: 'user.feedbacks.preview');
 
     /* POST */
     Route::post(uri: '/feedbacks/user/create', action: [FeedbacksController::class, 'create'])->name(name: 'user.feedbacks.create');

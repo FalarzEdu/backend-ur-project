@@ -1,0 +1,20 @@
+<?php
+
+use App\Models\Image;
+use Core\Database\ActiveRecord\Model;
+?>
+<div>
+    <h1
+        class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold mb-6">
+        <?= $title ?>
+    </h1>
+
+    <?php $images = Image::where(['feedback_id' => $paramId]);
+    foreach ($images as $image) {
+        if ($image->feedback_id == $paramId) {
+            echo "<img src=\"/public/assets/uploads/{$paramId}/{$image->path}\">";
+        }
+    }
+    ?>
+    <img src="/public/assets/uploads/165/banana67b4f800dc103_lado.jpg">
+</div>
