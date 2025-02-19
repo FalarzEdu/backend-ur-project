@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use App\Models\Feedback;
+use App\Models\FeedbackImage;
 use App\Models\Message;
-use App\Models\Image;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\FlashMessage;
-use App\Helpers\Translation;
 
 class FeedbacksController extends Controller
 {
@@ -84,55 +83,19 @@ class FeedbacksController extends Controller
             throw new \Exception(message: 'Feedback could not be saved.');
         }
 
-        $feedbackIns = new Feedback();
-        $feedbackIns->addImage($_FILES['image']);
-
-        /*if (!empty($_FILES['image'] && $_FILES['image']['error'][0] !== UPLOAD_ERR_NO_FILE)) {
-            $imageArray = $_FILES['image'];
-
-            if (!is_array($imageArray['name'])) {
-                $imageArray = [
-                    'name' => [$imageArray['name']],
-                    'type' => [$imageArray['type']],
-                    'tmp_name' => [$imageArray['tmp_name']],
-                    'error' => [$imageArray['error']],
-                    'size' => [$imageArray['size']]
-                ];
-            }
-
-            $directory = "/var/www/public/assets/uploads/" . $feedback->__get('id');
-
-            if (!is_dir($directory)) {
-                mkdir($directory, recursive: true);
-            }
-
-            foreach ($imageArray['name'] as $p => $img) {
-                $uniqueName = uniqid() . "_" . basename($img);
-                $path = $directory . "/" . $uniqueName;
-            
-                if (move_uploaded_file($imageArray['tmp_name'][$p], $path)) {
-                    $imageParams = [
-                        'feedback_id' => $feedback->__get('id'),
-                        'path' => $uniqueName
-                    ];
-                    $imageModel = new Image(params: $imageParams);
-            
-                    if (!$imageModel->save()) {
-                        FlashMessage::danger("Erro ao salvar imagem no banco!");
-                        return;
-                    }
-                } else {
-                    FlashMessage::danger("Erro ao mover imagem para o diretório!");
-                    return;
-                }
-            }
-            
-            FlashMessage::success('Feedback created successfully!');
-            $this->redirectTo(Route(name: 'feedbacks'));
+        for ($i = -1; !empty($_FILES['images']['name'][$i + 1]); $i++) {
+            $imageInstance = new FeedbackImage(params:[
+                'feedback_id' => $feedback->id
+            ]);
+            $imageInstance->addImage(
+                imageTmpName: $_FILES['images']['tmp_name'][$i + 1],
+                imageName: $_FILES['images']['name'][$i + 1],
+                saveFolder: (string) "feedback_$feedback->id"
+            );
         }
 
-        FlashMessage::success('Feedback created successfully!');
-            $this->redirectTo(Route(name: 'feedbacks'));*/
+        FlashMessage::success(value: 'Feedback created successfully!');
+        $this->redirectTo(location: Route(name: 'feedbacks'));
     }
 
     public function edit(Request $request): void
@@ -149,12 +112,21 @@ class FeedbacksController extends Controller
     public function preview(Request $request):void
     {
         $params = $request->getParams();
+        $feedbackId = $request->getParam(key: 'id');
         $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
-        $paramId = $request->getParam(key: 'id');
-        $feedbackTypes = $this->feedbackTypes;
+
+        // $feedbackTypes = $this->feedbackTypes;
+        $images = Feedback::where(conditions: ['id' => 35])[0]
+                ->images()
+                ->get();
+
+        dd($images);
 
         $title = "Visualização";
-        $this->render(view: 'feedbacks/user/preview', data: compact('title', 'paramId', 'feedback'));
+        $this->render(
+            view: 'feedbacks/user/preview', 
+            data: compact('title', 'paramId', 'feedback')
+        );
     }
 
     public function update(Request $request): void
