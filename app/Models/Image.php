@@ -12,6 +12,12 @@ use Lib\Validations;
  */
 class Image extends Model
 {
+    protected static string $table = 'feedback_images';
+    protected static array $columns = [
+        'feedback_id',
+        'path'
+    ];
+
     public function __construct(array $params)
     {
         parent::__construct(params: $params);
@@ -58,6 +64,13 @@ class Image extends Model
             error_log(
                 message: 'Erro ao processar imagem de feedback: ' . $e->getMessage()
             );
+        }
+    }
+
+    public function deleteImage($idFeedback) {
+        $images = Image::where(conditions: ['feedback_id' => $idFeedback]);
+        foreach ($images as $img) {
+            $img->destroy();
         }
     }
 
