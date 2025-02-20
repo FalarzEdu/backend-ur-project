@@ -65,7 +65,7 @@ class MealTest extends TestCase
         assertFalse(condition: $meal->save());
     }
 
-    public function testShouldReturnAllMealsIds(): void
+    public function testShouldReturnTodayMealsIds(): void
     {
         $data = [
             'date' => (new DateTime())->format('Y-m-d'),
