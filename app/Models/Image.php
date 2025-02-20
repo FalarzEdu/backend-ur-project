@@ -29,27 +29,24 @@ class Image extends Model
     }
 
     public function addImage(
-        string $imageTmpName, 
-        string $imageName, 
+        string $imageTmpName,
+        string $imageName,
         string $saveFolder
-    ): void
-    {
-        try
-        {
+    ): void {
+        try {
             if (!empty($imageName)) {
-
-                $newFileName = 
+                $newFileName =
                     $this->generateHashName(
                         imageTmpName: $imageTmpName
                     ) . $this->getFileExtension(fileName: $imageName);
-    
+
                 move_uploaded_file(
-                    from: $imageTmpName, 
+                    from: $imageTmpName,
                     to: $this->getStoreDir(saveFolder: $saveFolder) . $newFileName
                 );
-                
+
                 $this->__set(
-                    property: 'path', 
+                    property: 'path',
                     value: "$saveFolder/$newFileName"
                 );
                 if (!$this->save()) {
@@ -58,16 +55,15 @@ class Image extends Model
                     );
                 };
             }
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             error_log(
                 message: 'Erro ao processar imagem de feedback: ' . $e->getMessage()
             );
         }
     }
 
-    public function deleteImage($idFeedback) {
+    public function deleteImage(int $idFeedback): void
+    {
         $images = Image::where(conditions: ['feedback_id' => $idFeedback]);
         foreach ($images as $img) {
             $img->destroy();
@@ -95,7 +91,8 @@ class Image extends Model
     protected function generateHashName(string $imageTmpName): string
     {
         return hash_file(
-            algo: 'sha256', filename: $imageTmpName
+            algo: 'sha256',
+            filename: $imageTmpName
         );
     }
 }

@@ -30,7 +30,8 @@ class FeedbackImage extends Image
         parent::__construct(params: $params);
     }
 
-    public function feedback(): BelongsTo {
+    public function feedback(): BelongsTo
+    {
         return $this->belongsTo(
             related: Feedback::class,
             foreignKey: 'id_feedback'
