@@ -32,7 +32,7 @@ class Image extends Model
         string $imageTmpName,
         string $imageName,
         string $saveFolder
-    ): void {
+    ): bool {
         try {
             if (!empty($imageName)) {
                 $newFileName =
@@ -54,11 +54,14 @@ class Image extends Model
                         message: 'Erro ao processar imagem de nome:' . $imageTmpName
                     );
                 };
+                return true;
             }
+            return false;
         } catch (Exception $e) {
             error_log(
                 message: 'Erro ao processar imagem de feedback: ' . $e->getMessage()
             );
+            return false;
         }
     }
 

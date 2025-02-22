@@ -19,22 +19,22 @@ class UserTest extends TestCase
         parent::setUp();
 
         $this->user = new User(params: [
-        'name' => 'Fulano',
-        'academic_register' => '0',
-        'email' => 'fulano@example.com',
-        'password' => '123456',
-        'password_confirmation' => '123456',
-        'phone' => '0',
+            'name' => 'Fulano',
+            'academic_register' => '0',
+            'email' => 'fulano@example.com',
+            'password' => '123456',
+            'password_confirmation' => '123456',
+            'phone' => '0',
         ]);
         $this->user->save();
 
         $this->user2 = new User(params: [
-        'name' => 'Fulano1',
-        'academic_register' => '1',
-        'email' => 'fulano1@example.com',
-        'password' => '123456',
-        'password_confirmation' => '123456',
-        'phone' => '1',
+            'name' => 'Fulano1',
+            'academic_register' => '1',
+            'email' => 'fulano1@example.com',
+            'password' => '123456',
+            'password_confirmation' => '123456',
+            'phone' => '1',
         ]);
 
         $this->user2->save();
