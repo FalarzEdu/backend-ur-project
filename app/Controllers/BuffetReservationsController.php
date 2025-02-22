@@ -105,8 +105,8 @@ class BuffetReservationsController extends Controller
     {
         if (
             $reservation = BuffetReservation::where(conditions: [
-            'user_id' => $this->currentUser()->id,
-            'meal_id' => $mealId
+                'user_id' => $this->currentUser()->id,
+                'meal_id' => $mealId
             ])
         ) {
             return $reservation;
