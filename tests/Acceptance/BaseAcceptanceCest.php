@@ -16,6 +16,6 @@ class BaseAcceptanceCest
     }
     public function _after(AcceptanceTester $page): void
     {
-        Database::drop();
+        // Database::drop();
     }
 }
