@@ -7,6 +7,7 @@ use App\Models\FeedbackImage;
 use App\Models\User;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
@@ -46,17 +47,14 @@ class FeedbackImageTest extends TestCase
     {
         $imageMock = $this->getMockBuilder(FeedbackImage::class)
         ->setConstructorArgs([['feedback_id' => $this->feedback->id, 'path' => 'test_image.jpg']])
-        ->onlyMethods(['addImage']) // Mock only this method
+        ->onlyMethods(['addImage'])
         ->getMock();
 
-        // Custom implementation of addImage
         $imageMock->expects($this->once())
             ->method('addImage')
             ->willReturnCallback(function ($imageTmpName, $imageName, $saveFolder) use ($imageMock) {
-                // Fake hash filename
                 $fakeFileName = 'abcde.jpg';
 
-                // Simulate saving to the database
                 $imageMock->__set('path', "$saveFolder/$fakeFileName");
                 return $imageMock->save();
             });
@@ -67,11 +65,36 @@ class FeedbackImageTest extends TestCase
             'decoy_folder'
         );
 
-        // Check if it returns true
         $this->assertTrue($result);
 
-        // Check if the fake filename was "saved"
         $this->assertEquals('decoy_folder/abcde.jpg', $imageMock->__get('path'));
+    }
+
+    public function test_should_return_all_images_of_a_feedback(): void
+    {
+        $imageMock = $this->getMockBuilder(FeedbackImage::class)
+        ->setConstructorArgs([['feedback_id' => $this->feedback->id, 'path' => 'test_image.jpg']])
+        ->onlyMethods(['addImage'])
+        ->getMock();
+
+        $imageMock->expects($this->once())
+            ->method('addImage')
+            ->willReturnCallback(function ($imageTmpName, $imageName, $saveFolder) use ($imageMock) {
+                $fakeFileName = 'abcde.jpg';
+
+                $imageMock->__set('path', "$saveFolder/$fakeFileName");
+                return $imageMock->save();
+            });
+
+        $result = $imageMock->addImage(
+            tempnam(sys_get_temp_dir(), 'php'),
+            'name_test.png',
+            'decoy_folder'
+        );
+
+        $imageCount = $this->feedback->images()->get();
+
+        assertCount(expectedCount: 2, haystack: $imageCount);
     }
 
     public function test_should_delete_image(): void
@@ -90,24 +113,6 @@ class FeedbackImageTest extends TestCase
 
     public function test_should_validate_image_attributes(): void
     {
-        // $user = new User(params: [
-        //     'name' => 'Fulano',
-        //     'academic_register' => '0',
-        //     'email' => 'fulano1@example.com',
-        //     'password' => '123456',
-        //     'password_confirmation' => '123456',
-        //     'phone' => '0',
-        // ]);
-        // $user->save();        
-        
-        // $feedback = new Feedback(params: [
-        //     'type' => 'compliment',
-        //     'id_user' => $user->id,
-        //     'rating' => 5,
-        //     'is_harmfull' => 0
-        // ]);
-        // $feedback->save();
-
         $feedbackImage = new FeedbackImage(params: [
             'feedback_id' => $this->feedback->id,
         ]);
