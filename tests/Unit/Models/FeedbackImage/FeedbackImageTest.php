@@ -28,10 +28,10 @@ class FeedbackImageTest extends TestCase
             'password_confirmation' => '123456',
             'phone' => '0',
         ]);
-        $this->user->save();  
-        
+        $this->user->save();
+
         $this->user = User::where(['email' => 'fulano@example.com'])[0];
-        
+
         $this->feedback = new Feedback(params: [
             'type' => 'compliment',
             'id_user' => $this->user->id,
@@ -116,12 +116,13 @@ class FeedbackImageTest extends TestCase
         $feedbackImage = new FeedbackImage(params: [
             'feedback_id' => $this->feedback->id,
         ]);
-        $feedbackImage->path = '';
+        $feedbackImage->__set('path', '');
 
         $this->assertFalse(condition: $feedbackImage->isValid());
 
         $feedbackImage->__set(
-            property: 'path', value: 'test_image.jpg'
+            property: 'path',
+            value: 'test_image.jpg'
         );
 
         $this->assertTrue(condition: $feedbackImage->isValid());

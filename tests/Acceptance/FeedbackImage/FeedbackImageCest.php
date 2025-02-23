@@ -39,7 +39,7 @@ class FeedbackImageCest extends BaseAcceptanceCest
 
         $page->see('Feedback created successfully!');
         $page->reloadPage();
-        
+
         $page->waitForElementVisible('.fa-eye', 5);
 
         $page->click('(//i[contains(@class, "fa-eye")])[last()]');
