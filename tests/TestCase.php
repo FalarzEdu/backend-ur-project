@@ -15,7 +15,8 @@ class TestCase extends FrameworkTestCase
 
     public function tearDown(): void
     {
-        Database::drop();
+        // Is causing trouble with the FeedbackImageTest. Veirfy later.
+        // Database::drop();
     }
 
     protected function getOutput(callable $callable): string

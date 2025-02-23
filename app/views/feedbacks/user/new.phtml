@@ -1,23 +1,22 @@
 <form
     action="<?= Route(name: 'user.feedbacks.create') ?>"
     method="POST"
-    class="flex flex-col gap-6 items-start w-3/4 mx-auto text-black py-4"
->
+    enctype="multipart/form-data"
+    class="flex flex-col gap-6 items-start w-3/4 mx-auto text-black py-4">
 
-<h1 
-    class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold"
->
-    <?= $title ?>
-</h1>
+    <h1
+        class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold">
+        <?= $title ?>
+    </h1>
 
     <div class="w-full">
         <h2 class="rf-md mb-2">Tipo *</h2>
         <select name="feedback[type]" class="default-input w-full" id="feedback-type-select">
             <option value="">Selecione</option>
 
-            <?php foreach($feedbackTypes as $type): ?>
-                <option value="<?= $type ?>" >
-                    <?= ucfirst(string: translate(key: "feedback_types", value:"$type")) 
+            <?php foreach ($feedbackTypes as $type): ?>
+                <option value="<?= $type ?>">
+                    <?= ucfirst(string: translate(key: "feedback_types", value: "$type"))
                     ?>
                 </option>
             <?php endforeach; ?>
@@ -31,62 +30,60 @@
 
             <?php for ($i = 1; $i <= 5; $i++): ?>
                 <label for="rating-<?= $i ?>" class="text-3xl">
-                    <i 
-                        class="fa-regular fa-star text-yellow-600 rating-star rating-star-<?= $i ?>" data-value="<?= $i ?>"
-                    ></i>
+                    <i
+                        class="fa-regular fa-star text-yellow-600 rating-star rating-star-<?= $i ?>" data-value="<?= $i ?>"></i>
                 </label>
-                <input 
-                    type="radio" 
-                    name="feedback[rating]" 
-                    id="rating-<?= $i ?>" 
+                <input
+                    type="radio"
+                    name="feedback[rating]"
+                    id="rating-<?= $i ?>"
                     value="<?= $i ?>"
-                    class="hidden"
-                >
+                    class="hidden">
             <?php endfor; ?>
-            
+
         </div>
     </div>
 
     <div class="w-full">
         <label for="message_content" class="rf-md mb-2">Descrição *</label>
-        <textarea 
-            name="message[content]" 
-            id="message_content" 
-            class="default-input w-full min-h-28"    
-            placeholder="Forneça detalhes desta avaliação"
-        ></textarea>
+        <textarea
+            name="message[content]"
+            id="message_content"
+            class="default-input w-full min-h-28"
+            placeholder="Forneça detalhes desta avaliação"></textarea>
+    </div>
+
+    <div>
+        <label for="image_content">Imagem</label>
+        <input type="file" name="images[]" id="image_content" multiple />
     </div>
 
     <div class="w-full hidden" id="danos-a-saude">
         <h2 class="rf-md mb-2">Pode causar danos à saúde? *</h2>
         <div class="flex justify-center gap-8 btn-group">
-            <label 
-                for="is-harmfull-yes" 
-                class="btn-md-outline-primary btn-choice shadow-lg"
-            >
+            <label
+                for="is-harmfull-yes"
+                class="btn-md-outline-primary btn-choice shadow-lg">
                 Sim
             </label>
-            <input 
-                type="radio" 
-                name="feedback[is_harmfull]" 
-                id="is-harmfull-yes" 
+            <input
+                type="radio"
+                name="feedback[is_harmfull]"
+                id="is-harmfull-yes"
                 value="1"
-                class="hidden"
-            >
+                class="hidden">
 
-            <label 
-                for="is-harmfull-no" 
-                class="btn-md-outline-primary btn-choice shadow-lg"
-            >
+            <label
+                for="is-harmfull-no"
+                class="btn-md-outline-primary btn-choice shadow-lg">
                 Não
             </label>
-            <input 
-                type="radio" 
-                name="feedback[is_harmfull]" 
-                id="is-harmfull-no" 
+            <input
+                type="radio"
+                name="feedback[is_harmfull]"
+                id="is-harmfull-no"
                 value="0"
-                class="hidden"
-            >
+                class="hidden">
         </div>
     </div>
 
