@@ -2,14 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\Meal;
 use Core\Http\Controllers\Controller;
-use Core\Http\Request;
-use Lib\FlashMessage;
 
-class UserController
+class UserController extends Controller
 {
-    private string $layout = 'user';
+    protected string $layout = 'user';
 
     public function index(): void
     {
@@ -19,7 +17,7 @@ class UserController
   /**
   * @param array<string, mixed> $data
   */
-    private function render(string $view, array $data = []): void
+    protected function render(string $view, array $data = []): void
     {
         extract(array: $data);
 

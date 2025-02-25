@@ -1,14 +1,23 @@
 <div class="text-black">
-    <div class="">
-        <main class="flex flex-col justify-center items-center h-[85%] gap-12">
+    <div class="mt-4">
+        <main class="flex flex-col justify-start items-center h-[85%] gap-12">
             <section class="card-group">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h2 class="card-title text-white">Refeições confirmadas</h2>
+                        <h2 class="card-title text-white">Almoços confirmados</h2>
                         <i class="card-icon fa-solid fa-clipboard-check text-tertiary"></i>
                     </div>
                     <div class="card-body">
-                        <p class="card-content rf-lg font-bold text-primary text-center">100</p>
+                        <p class="card-content rf-lg font-bold text-primary text-center"><?= $lunchReservations ?></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <h2 class="card-title text-white">Jantas confirmadas</h2>
+                        <i class="card-icon fa-solid fa-clipboard-check text-tertiary"></i>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-content rf-lg font-bold text-primary text-center"><?= $dinnerReservations ?></p>
                     </div>
                 </div>
             </section>

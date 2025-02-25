@@ -7,7 +7,7 @@ use Core\Database\ActiveRecord\Model;
 
 class FeedbacksPopulate
 {
-    public static function populate()
+    public static function populate(): void
     {
         $data =  [
             'type' => 'complaint',
