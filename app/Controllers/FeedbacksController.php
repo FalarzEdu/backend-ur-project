@@ -3,11 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\Feedback;
+use App\Models\FeedbackImage;
+use App\Models\Image;
 use App\Models\Message;
+use Core\Constants\Constants;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\FlashMessage;
-use App\Helpers\Translation;
 
 class FeedbacksController extends Controller
 {
@@ -46,7 +48,7 @@ class FeedbacksController extends Controller
         $feedbackTypes = $this->feedbackTypes;
 
         $this->render(
-            view:'feedbacks/user/new',
+            view: 'feedbacks/user/new',
             data: compact('title', 'feedbackTypes')
         );
     }
@@ -81,10 +83,21 @@ class FeedbacksController extends Controller
             FlashMessage::danger(value: "Error creating feedback's message!");
             $this->redirectTo(location: Route(name: 'feedbacks'));
             throw new \Exception(message: 'Feedback could not be saved.');
-        } else {
-            FlashMessage::success(value: 'Feedback created successfully!');
-            $this->redirectTo(location: Route(name: 'feedbacks'));
         }
+
+        for ($i = -1; !empty($_FILES['images']['name'][$i + 1]); $i++) {
+            $imageInstance = new FeedbackImage(params:[
+                'feedback_id' => $feedback->id
+            ]);
+            $imageInstance->addImage(
+                imageTmpName: $_FILES['images']['tmp_name'][$i + 1],
+                imageName: $_FILES['images']['name'][$i + 1],
+                saveFolder: (string) "feedback_$feedback->id"
+            );
+        }
+
+        FlashMessage::success(value: 'Feedback created successfully!');
+        $this->redirectTo(location: Route(name: 'feedbacks'));
     }
 
     public function edit(Request $request): void
@@ -96,6 +109,28 @@ class FeedbacksController extends Controller
 
         $title = "Editar avaliação";
         $this->render(view: 'feedbacks/user/edit', data: compact('title', 'paramId', 'feedback', 'feedbackTypes'));
+    }
+
+    public function preview(Request $request): void
+    {
+        $params = $request->getParams();
+        $feedbackId = $request->getParam(key: 'id');
+        $feedback = $this->currentUser()->feedbacks()->findById($params['id']);
+
+        // $feedbackTypes = $this->feedbackTypes;
+        $images = Feedback::where(conditions: ['id' => $feedbackId])[0]
+            ->images()
+            ->get();
+
+        $title = "Visualização";
+        $this->render(
+            view: 'feedbacks/user/preview',
+            data: compact(
+                'title',
+                'feedback',
+                'images'
+            )
+        );
     }
 
     public function update(Request $request): void
@@ -118,10 +153,14 @@ class FeedbacksController extends Controller
     {
         $paramId = $request->getParam(key: 'id');
         $feedback = $this->currentUser()->feedbacks()->findById(id: $paramId);
+
+        $imageInstance = new FeedbackImage(params: ['feedback_id' => $paramId]);
+        $imageInstance->deleteImage($paramId);
+
         $feedback->destroy();
 
         if (!$feedback::findById($paramId)) {
-            FlashMessage::success(value:'Registro deletado com sucesso.');
+            FlashMessage::success(value: 'Registro deletado com sucesso.');
             $this->redirectTo(location: Route(name: 'feedbacks'));
         }
     }

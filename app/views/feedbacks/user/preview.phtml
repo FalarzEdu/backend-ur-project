@@ -1,0 +1,11 @@
+<div>
+    <h1
+        class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold mb-6">
+        <?= $title ?>
+    </h1>
+
+    <?php foreach ($images as $image): ?>
+        <img src="/assets/uploads/<?= $image->path ?>" alt="aa">
+    <?php endforeach; ?>
+
+</div>

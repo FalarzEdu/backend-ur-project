@@ -5,6 +5,7 @@ services:
     volumes:
       - .:/var/www
       - ./server/nginx.conf:/etc/nginx/conf.d/default.conf
+    entrypoint: ["/bin/sh", "server/nginx-entrypoin.sh"]
     ports:
       - 8080:80
       - 8082:8080

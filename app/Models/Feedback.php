@@ -40,10 +40,19 @@ class Feedback extends Model
             foreignKey: 'id_user'
         );
     }
+
     public function messages(): HasMany
     {
         return $this->hasMany(
             related: Message::class,
+            foreignKey: 'feedback_id'
+        );
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(
+            related: FeedbackImage::class,
             foreignKey: 'feedback_id'
         );
     }
@@ -59,16 +68,6 @@ class Feedback extends Model
         'is_harmfull'
     ];
 
-    // public function problems(): HasMany
-    // {
-    //     return $this->hasMany(Problem::class, 'user_id');
-    // }
-
-    // public function reinforcedProblems(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Problem::class, 'problem_user_reinforce', 'user_id', 'problem_id');
-    // }
-
     public function validates(): void
     {
         Validations::notEmpty(attribute: 'type', obj: $this);
@@ -77,6 +76,6 @@ class Feedback extends Model
 
     public function __set(string $property, mixed $value): void
     {
-        parent::__set($property, $value);
+        parent::__set(property: $property, value: $value);
     }
 }
