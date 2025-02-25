@@ -4,7 +4,8 @@ module.exports = {
   safelist: [
     'alert-success',
     'alert-danger',
-    'active-btn'
+    'active-btn',
+    'z-50'
   ],
   theme: 
   {
