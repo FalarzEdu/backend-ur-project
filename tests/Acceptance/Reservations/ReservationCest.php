@@ -16,11 +16,9 @@ class ReservationCest extends BaseAcceptanceCest
     private User $user;
     private User $user2;
     private Admin $admin;
-    private Meal $lunch;
-    private Meal $dinner;
 
     public function _before(AcceptanceTester $page): void
-    {   
+    {
         parent::_before(page: $page);
         $this->user = new User([
             'name' => 'Fulano',
@@ -49,17 +47,6 @@ class ReservationCest extends BaseAcceptanceCest
             'password_confirmation' => '123456',
         ]);
         $this->admin->save();
-
-        $this->lunch = new Meal(params: [
-            'date' => (new DateTime())->format(format: 'Y-m-d'),
-            'meal_type' => 'lunch'
-        ]);
-        $this->lunch->save();
-        $this->dinner = new Meal(params: [
-            'date' => (new DateTime())->format(format: 'Y-m-d'),
-            'meal_type' => 'dinner'
-        ]);
-        $this->dinner->save();
     }
 
     public function shouldMakeLunchReservation(AcceptanceTester $page): void
@@ -82,15 +69,22 @@ class ReservationCest extends BaseAcceptanceCest
 
     public function adminShouldSeeReservations(AcceptanceTester $page): void
     {
+        $mealsIds = Meal::getTodayMealsId();
         $reservation = new BuffetReservation(params: [
             'user_id' => $this->user->id,
-            'meal_id' => $this->lunch->id,
+            'meal_id' => $mealsIds['lunchId'],
             'has_assistance' => 0
         ]);
         $reservation->save();
         $reservation = new BuffetReservation(params: [
             'user_id' => $this->user2->id,
-            'meal_id' => $this->lunch->id,
+            'meal_id' => $mealsIds['lunchId'],
+            'has_assistance' => 0
+        ]);
+        $reservation->save();
+        $reservation = new BuffetReservation(params: [
+            'user_id' => $this->user2->id,
+            'meal_id' => $mealsIds['dinnerId'],
             'has_assistance' => 0
         ]);
         $reservation->save();

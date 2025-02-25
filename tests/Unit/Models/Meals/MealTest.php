@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Models;
+namespace Tests\Unit\Models\Meals;
 
 use App\Models\BuffetReservation;
 use App\Models\Meal;
@@ -50,7 +50,7 @@ class MealTest extends TestCase
     {
         // Should insert the first row on the table
         $this->assertTrue(condition: $this->lunch->save());
-        $this->assertCount(expectedCount: 1, haystack: Meal::all());
+        $this->assertCount(expectedCount: 3, haystack: Meal::all());
     }
 
     public function testShouldNotCreateMeal(): void
@@ -67,34 +67,38 @@ class MealTest extends TestCase
 
     public function testShouldReturnTodayMealsIds(): void
     {
-        $data = [
-            'date' => (new DateTime())->format('Y-m-d'),
-            'meal_type' => 'lunch'
-        ];
-        $lunch = new Meal(params: $data);
+        // $data = [
+        //     'date' => (new DateTime())->format('Y-m-d'),
+        //     'meal_type' => 'lunch'
+        // ];
+        // $lunch = new Meal(params: $data);
 
-        $data = [
-            'date' => (new DateTime())->format('Y-m-d'),
-            'meal_type' => 'dinner'
-        ];
-        $dinner = new Meal(params: $data);
+        // $data = [
+        //     'date' => (new DateTime())->format('Y-m-d'),
+        //     'meal_type' => 'dinner'
+        // ];
+        // $dinner = new Meal(params: $data);
 
-        $lunch->save();
-        $dinner->save();
+        // $lunch->save();
+        // $dinner->save();
 
-        // Shoul be an array of today's meals id's
+        // Should be an array of today's meals id's
         $mealIds = Meal::getTodayMealsId();
+
+        $meals = Meal::where(
+            conditions: ['date' => (new Datetime())->format(format: 'Y-m-d')]
+        );
 
         $this->assertIsArray(actual: $mealIds);
         $this->assertArrayHasKey(key: 'lunchId', array: $mealIds);
         $this->assertArrayHasKey(key: 'dinnerId', array: $mealIds);
         // Verify if id's are correct
         $this->assertEquals(
-            expected: $lunch->id,
+            expected: $meals[0]->id,
             actual: (int) $mealIds['lunchId']
         );
         $this->assertEquals(
-            expected: $dinner->id,
+            expected: $meals[1]->id,
             actual: (int) $mealIds['dinnerId']
         );
     }
