@@ -30,11 +30,6 @@ vendor/
 # Yarn dependencies
 node_modules/
 
-# Codeceptor tests outputs
-tests/Acceptance/_output/
-# Codeceptor auto generated files
-tests/Support/_generated/
-
 # images feedbacks
 public/assets/images/uploads/
 public/assets/uploads/

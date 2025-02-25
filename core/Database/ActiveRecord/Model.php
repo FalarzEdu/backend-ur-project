@@ -302,8 +302,6 @@ abstract class Model
     }
 
     /**
-     * Accepts an array of parameters like 'key = value'.
-     * 
      * @param array<string, mixed> $conditions
      * @return array<static>
      */

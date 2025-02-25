@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Meal;
+use App\Services\ProfileAvatar;
 use Core\Database\ActiveRecord\BelongsToMany;
 use Core\Database\ActiveRecord\HasMany;
 use Lib\Validations;
@@ -30,16 +30,6 @@ class User extends Model
         return $this->hasMany(
             related: Feedback::class,
             foreignKey: 'id_user'
-        );
-    }
-
-    public function meals(): BelongsToMany
-    {
-        return $this->BelongsToMany(
-            related: Meal::class,
-            pivot_table: 'buffet_reservations',
-            from_foreign_key: 'user_id',
-            to_foreign_key: 'meal_id'
         );
     }
 

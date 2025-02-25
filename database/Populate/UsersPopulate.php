@@ -3,6 +3,7 @@
 namespace Database\Populate;
 
 use App\Models\User;
+use Core\Database\ActiveRecord\Model;
 
 class UsersPopulate
 {

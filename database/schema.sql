@@ -175,14 +175,6 @@ CREATE TABLE `meals` (
   `meal_type` enum('lunch','dinner') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `meals`
---
-
-INSERT INTO `meals` (`id`, `date`, `meal_type`) VALUES
-(1, CURDATE(), 'lunch'),
-(2, CURDATE(), 'dinner');
-
 -- --------------------------------------------------------
 
 --
@@ -243,7 +235,7 @@ CREATE TABLE `payment_type` (
 
 CREATE TABLE `snackbar_goods` (
   `id` int UNSIGNED NOT NULL,
-  `price` decimal(10,2) UNSIGNED NOT NULL,
+  `price` decimal(10,0) UNSIGNED NOT NULL,
   `description` text NOT NULL,
   `image_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

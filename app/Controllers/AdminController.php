@@ -2,31 +2,24 @@
 
 namespace App\Controllers;
 
-use App\Models\Meal;
+use App\Models\Admin;
 use Core\Http\Controllers\Controller;
-use DateTime;
+use Core\Http\Request;
+use Lib\FlashMessage;
 
-class AdminController extends Controller
+class AdminController
 {
-    protected string $layout = 'admin';
+    private string $layout = 'admin';
 
     public function index(): void
     {
-        $mealIds = Meal::getTodayMealsId();
-
-        $todayLunch = Meal::findById(id: (int) $mealIds['lunchId']);
-        $todayDinner = Meal::findById(id: (int) $mealIds['dinnerId']);
-
-        $lunchReservations = $todayLunch->users()->count();
-        $dinnerReservations = $todayDinner->users()->count();
-
-        $this->render(view: 'index', data: compact('lunchReservations', 'dinnerReservations'));
+        $this->render(view: 'index');
     }
 
   /**
   * @param array<string, mixed> $data
   */
-    protected function render(string $view, array $data = []): void
+    private function render(string $view, array $data = []): void
     {
         extract($data);
 

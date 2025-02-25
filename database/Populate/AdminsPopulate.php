@@ -7,7 +7,7 @@ use Core\Database\ActiveRecord\Model;
 
 class AdminsPopulate
 {
-    public static function populate(): void
+    public static function populate()
     {
         $data =  [
             'name' => 'Admin',
