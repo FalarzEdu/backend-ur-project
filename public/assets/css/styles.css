@@ -910,6 +910,10 @@ video {
   bottom: 2rem;
 }
 
+.left-8{
+  left: 2rem;
+}
+
 .right-0{
   right: 0px;
 }
@@ -922,12 +926,21 @@ video {
   top: 0px;
 }
 
+.z-50{
+  z-index: 50;
+}
+
 .col-start-2{
   grid-column-start: 2;
 }
 
 .m-auto{
   margin: auto;
+}
+
+.mx-2{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .mx-auto{
@@ -960,10 +973,29 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.mb-8{
+  margin-bottom: 2rem;
+}
+
 .mt-32{
   margin-top: 8rem;
 }
 
+<<<<<<< Updated upstream
+=======
+.mt-4{
+  margin-top: 1rem;
+}
+
+.mb-24{
+  margin-bottom: 6rem;
+}
+
+.mb-28{
+  margin-bottom: 7rem;
+}
+
+>>>>>>> Stashed changes
 .flex{
   display: flex;
 }
@@ -978,6 +1010,10 @@ video {
 
 .hidden{
   display: none;
+}
+
+.h-12{
+  height: 3rem;
 }
 
 .h-\[85\%\]{
@@ -1057,8 +1093,13 @@ video {
   justify-content: space-between;
 }
 
+<<<<<<< Updated upstream
 .justify-items-center{
   justify-items: center;
+=======
+.gap-1{
+  gap: 0.25rem;
+>>>>>>> Stashed changes
 }
 
 .gap-12{
@@ -1119,6 +1160,27 @@ video {
   border-radius: 0.5rem;
 }
 
+<<<<<<< Updated upstream
+=======
+.rounded-none{
+  border-radius: 0px;
+}
+
+.rounded-l-2xl{
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.rounded-r-2xl{
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.border-2{
+  border-width: 2px;
+}
+
+>>>>>>> Stashed changes
 .border-b-2{
   border-bottom-width: 2px;
 }
@@ -1146,11 +1208,23 @@ video {
   background-color: rgb(73 73 119 / var(--tw-bg-opacity, 1));
 }
 
+.bg-secondary\/75{
+  background-color: rgb(73 73 119 / 0.75);
+}
+
 .bg-tertiary{
   --tw-bg-opacity: 1;
   background-color: rgb(220 220 220 / var(--tw-bg-opacity, 1));
 }
 
+<<<<<<< Updated upstream
+=======
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+>>>>>>> Stashed changes
 .bg-\[url\(\'\/assets\/images\/background\/backgrounf\.jpg\'\)\]{
   background-image: url('/assets/images/background/backgrounf.jpg');
 }
@@ -1203,6 +1277,10 @@ video {
 
 .pb-0{
   padding-bottom: 0px;
+}
+
+.pb-16{
+  padding-bottom: 4rem;
 }
 
 .pl-1{
