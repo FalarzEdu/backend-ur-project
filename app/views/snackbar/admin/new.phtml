@@ -1,0 +1,37 @@
+<form
+    action="<?= Route(name: 'admin.snackbar_good.create') ?>"
+    method="POST"
+    enctype="multipart/form-data"
+    class="flex flex-col gap-6 items-start w-3/4 mx-auto text-black py-4">
+
+    <h1
+        class="text-center w-full rf-2xl mb-0 pb-0 font-ws text-primary/75 font-bold">
+        <?= $title ?>
+    </h1>
+
+    <div class="w-full">
+        <label for="message_content" class="rf-md mb-2">Nome *</label>
+        <input
+            name="snackbar_good[description]"
+            id="message_content"
+            class="default-input w-full"
+            placeholder="Ex.: Coxinha com Catupiry"></input>
+    </div>
+
+    <div class="w-full">
+        <label for="message_content" class="rf-md mb-2">Preço *</label>
+        <input
+            name="snackbar_good[price]"
+            id="message_content"
+            class="default-input w-full"
+            placeholder="Ex.: R$ 4,50"></input>
+    </div>
+
+    <!-- <div>
+        <label for="image_content">Imagem</label>
+        <input type="file" name="images[]" id="image_content" multiple />
+    </div> -->
+
+    <button type="submit" class="btn-md bg-primary w-full">Criar</button>
+
+</form>

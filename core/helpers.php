@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\PriceFormatHelper;
 use App\Helpers\Translation;
 use Core\Debug\Debugger;
 use Core\Router\Router;
@@ -44,5 +45,12 @@ if (!function_exists(function: 'is_home_page')) {
                 haystack: $home_pages
             )
         );
+    }
+}
+
+if (!function_exists(function: 'price_format')) {
+    function price_format(string $value): string
+    {
+        return PriceFormatHelper::prepareToDisplay(price: $value);
     }
 }
